@@ -1,0 +1,6 @@
+# Change numbers here (or leave as is). Paper trading only.
+account_equity: 10000      # pretend account size in dollars
+max_risk_pct: 0.5          # pretend risk per trade, percent of the account ($50)
+fee_pct: 0.10              # exchange fee per side, percent. Check what YOUR exchange charges.
+entry_minutes: 15          # candle size used for entries (15 is far cheaper in fees than 5)
+notify_research_signals: false   # true = also text you when unproven research rules fire
