@@ -195,6 +195,15 @@ def cmd_telegram_test() -> int:
         return 1
     r = send_telegram("Test message from your crypto paper-trading app. If you can read this, phone alerts work.")
     print("Telegram result:", r)
+    if r in ("http_401", "http_404"):
+        print("PROBLEM: Telegram does not accept the bot token. Re-copy it from BotFather (/mybots > your bot > API Token) "
+              "into the TELEGRAM_BOT_TOKEN secret of THIS repo (Settings > Secrets and variables > Actions). "
+              "What the saved token looks like (token itself hidden): " + token_shape())
+    elif r == "http_400":
+        print("PROBLEM: the token works but the chat number is wrong, or you have not sent your bot a message yet. "
+              "Open your bot in Telegram, tap Start, send 'hi', then fix TELEGRAM_CHAT_ID (digits only).")
+    elif r == "http_403":
+        print("PROBLEM: the bot is blocked or was removed from that chat. Open the bot in Telegram, tap Start, and try again.")
     return 0 if r == "delivered" else 1
 
 
