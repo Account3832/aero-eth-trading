@@ -1,5 +1,6 @@
 name: Research and ingest
-# Run this ONCE by hand first (it downloads 2 years of candles and builds the reports). It then re-runs daily.
+# Run this by hand first (it downloads up to 2 years of candles per coin and builds the reports). With many coins the first
+# download may need 2 or 3 runs: each run stops cleanly after 70 minutes and the next one continues. It then re-runs daily.
 on:
   schedule:
     - cron: "17 3 * * *"
@@ -27,7 +28,7 @@ jobs:
       - run: pip install -r requirements-core.txt
       - run: bash scripts/prepare_state.sh
       - name: Download candles
-        run: python -m cryptoai.runner ingest --days ${{ inputs.days || '730' }}
+        run: python -m cryptoai.runner ingest --days ${{ inputs.days || '730' }} --budget-min 70   # stops cleanly at 70 minutes; run again to continue
       - name: Backtest
         run: python -m cryptoai.runner backtest --days ${{ inputs.days || '730' }}
       - name: Publish state
