@@ -45,7 +45,7 @@ def _run(base):
 def test_dashboard_runs_on_empty_state():
     with tempfile.TemporaryDirectory() as t:
         out = _run(t)
-        assert "AERO + ETH Trading Terminal" in out and "Run the 'Research and ingest' job" in out
+        assert "Crypto Trading Terminal" in out and "Run the 'Research and ingest' job" in out
 
 
 def test_dashboard_runs_with_full_state():

@@ -11,7 +11,7 @@ from pathlib import Path
 import pandas as pd
 
 from .backtest import resolve_trade
-from .config import Settings
+from .config import Settings, unit_decimals
 from .store import read_json, write_json
 
 CLOSED_COLS = ["id", "symbol", "strategy", "label", "signal_time", "entry_time", "exit_time", "entry", "risk_per_unit", "units",
@@ -29,7 +29,7 @@ def size_position(s: Settings, symbol: str, entry: float, risk_per_unit: float) 
     want = s.risk_usd / risk_per_unit
     cap = s.account_equity * 0.95 / entry
     units = min(want, cap)
-    dec = 1 if symbol.upper().startswith("AERO") else 4
+    dec = unit_decimals(symbol)
     units = round(units, dec)
     return {"units": units, "notional_usd": round(units * entry, 2), "risk_usd": round(units * risk_per_unit, 2), "capped": want > cap}
 

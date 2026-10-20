@@ -6,6 +6,7 @@ from __future__ import annotations
 
 import argparse
 import sys
+import time
 
 import pandas as pd
 
@@ -13,9 +14,10 @@ from .alerts import AlertType, find_chat_ids, send_alert, send_telegram, telegra
 from .backtest import report_markdown, run_research
 from .config import kill_switch, load_settings, now_utc, state_dir
 from .data import gap_stats, ingest, load_bars, resample_bars
+from .store import load_raw
 from .levels import CRYPTO_TFS, Engine, analyze, trend_break_warning
 from .features import add_features
-from .monitor import scan, signal_text
+from .monitor import proven_strategies, scan, signal_text
 from .paper import CryptoLedger
 from .store import append_jsonl, read_json, write_json
 from .tradelog import summarize, trade_log
@@ -39,24 +41,36 @@ def _all_symbols(s):
     return list(s.symbols) + ([s.ref_symbol] if s.ref_symbol and s.ref_symbol not in s.symbols else [])
 
 
-def cmd_ingest(s, base, days: int) -> int:
-    bad = 0
-    for sym in _all_symbols(s):
-        r = ingest(sym, days, base=base)
-        print(f"{sym}: +{r['added']} bars, total {r['bars']}, last {r['last']}, missing {r['missing_pct']}% errors={r['errors']}")
+def cmd_ingest(s, base, days: int, budget_min: float = 0) -> int:
+    """Downloads history. With a time budget it stops cleanly when time is up; saved candles are kept and the next run resumes."""
+    bad, unfinished = 0, []
+    deadline = time.monotonic() + budget_min * 60 if budget_min and budget_min > 0 else None
+    syms = _all_symbols(s)
+    for i, sym in enumerate(syms):
+        r = ingest(sym, days, base=base, deadline=deadline)
+        print(f"{sym}: +{r['added']} bars, total {r['bars']}, last {r['last']}, missing {r['missing_pct']}% errors={r['errors']}"
+              + ("  (time budget reached, will resume)" if r.get("partial") else ""))
         bad += 0 if r["ok"] else 1
+        if r.get("partial"):
+            unfinished.append(sym)
+        if deadline is not None and time.monotonic() > deadline:
+            unfinished += [x for x in syms[i + 1:]]
+            break
+    if unfinished:
+        print("NOT FINISHED YET: " + ", ".join(unfinished) + ". Run 'Research and ingest' again to continue where it stopped (the daily run also continues it).")
     return 0 if bad == 0 else 1
 
 
 def cmd_backtest(s, base, days: int) -> int:
+    fam = s.family_tests()
     for sym in s.symbols:
         d = prepare(s, sym, base)
-        if len(d) == 0:
-            print(f"{sym}: not enough data yet")
+        if len(d) == 0 or len(d) < 90 * s.bars_per_day:
+            print(f"{sym}: waiting for more history (need about 90 days; have {len(d) // max(s.bars_per_day, 1)}). Run 'Research and ingest' again.")
             continue
         out = base / sym
         out.mkdir(parents=True, exist_ok=True)
-        rep = run_research(d, s, sym, engine=Engine(load_bars(sym, base), CRYPTO_TFS))
+        rep = run_research(d, s, sym, engine=Engine(load_bars(sym, base), CRYPTO_TFS), family_size=fam)
         write_json(out / "backtest_report.json", rep)
         (out / "backtest_report.md").write_text(report_markdown(rep))
         t = trade_log(d, s, sym, days=days)
@@ -106,10 +120,18 @@ def _gate(s, base, led: CryptoLedger, all_ledgers, now, rows_stale: bool, row: d
     return ""
 
 
+def _still_loading(sym, base, now) -> bool:
+    """True when stored history ends more than 3 days ago, i.e. the first big download for this coin is not finished."""
+    raw = load_raw(sym, base)
+    return len(raw) > 0 and (now - raw.index[-1]) > pd.Timedelta(days=3)
+
+
 def cmd_evaluate(s, base, fetch: bool = True) -> int:
     now = now_utc()
     if fetch:   # top up the newest candles first (cheap: a day or two at most)
         for sym in _all_symbols(s):
+            if _still_loading(sym, base, now):
+                continue   # a big gap is the research job's work, never the 5-minute job's
             try:
                 r = ingest(sym, 2, now=now, base=base, log=lambda *_: None)
                 if not r["ok"]:
@@ -123,6 +145,10 @@ def cmd_evaluate(s, base, fetch: bool = True) -> int:
         sym = led.symbol
         d = prepare(s, sym, base, now)
         info = {"ok": False}
+        if _still_loading(sym, base, now):
+            info["error"] = "history is still downloading - run 'Research and ingest' again"
+            status["symbols"][sym] = info
+            continue
         if len(d) < 100:
             info["error"] = "not enough stored data - run the research job first"
             status["symbols"][sym] = info
@@ -139,7 +165,9 @@ def cmd_evaluate(s, base, fetch: bool = True) -> int:
                 if p_.get("filled_alerted"):
                     send_alert(AlertType.TREND_BREAK, f"{sym.split('-')[0]}: {warn}", key=f"brk-{p_['id']}", base=base)
         write_json(base / sym / "levels.json", lv)
-        rows = scan(s, d, sym, levels=lv)
+        proven = proven_strategies(read_json(base / sym / "backtest_report.json", {})) if s.alert_only_proven else None
+        info["proven"] = sorted(proven) if proven is not None else None
+        rows = scan(s, d, sym, levels=lv, proven=proven)
         write_json(base / sym / "monitor.json", {"generated_at": str(now), "symbol": sym, "bar_close": str(last_close), "rows": rows})
         if stale:
             send_alert(AlertType.FEED_STALE, f"{sym}: newest completed candle is {age_min:.0f} minutes old.", key=f"stale-{sym}-{now.strftime('%Y%m%d%H')}", base=base)
@@ -156,7 +184,7 @@ def cmd_evaluate(s, base, fetch: bool = True) -> int:
                 inst_label = _label(r)
                 plan = {"strategy": r["strategy"], "label": inst_label, "signal_time": str(d.index[-1]), "atr": r["atr"], "stop_atr": r["stop_atr"],
                         "t1_r": r["t1_r"], "t2_r": r["t2_r"], "max_hold_hours": r["max_hold_hours"], "units": r["units"], "regime": r["regime"],
-                        "evidence_status": "NOT_PROVEN", "plan_mode": r.get("plan_mode", "atr")}
+                        "evidence_status": "EDGE_SUPPORTED_ON_PAST_DATA" if s.alert_only_proven else "NOT_PROVEN", "plan_mode": r.get("plan_mode", "atr")}
                 if plan["plan_mode"] == "chart":
                     plan.update(stop_price=r["stop"], t1_price=r["target1"], t2_price=r["target2"])
                 if led.open_position(plan):
@@ -164,8 +192,9 @@ def cmd_evaluate(s, base, fetch: bool = True) -> int:
                     send_alert(AlertType.ENTRY_TRIGGER, "BUY signal - practice trade opened.\n" + signal_text(r, s), key=key, base=base)
             elif s.notify_research_signals:
                 send_alert(AlertType.RESEARCH_SIGNAL, "RESEARCH ONLY (not proven, not a practice trade).\n" + signal_text(r, s), key=key, base=base)
-            else:
+            elif not s.alert_only_proven:
                 send_alert(AlertType.RESEARCH_SIGNAL, "RESEARCH ONLY. " + signal_text(r, s), key=key, base=base, telegram=False)
+            # else: a strategy that has not passed the fair test is shown on the dashboard only. No alert, no practice trade.
         info.update(ok=True, last_bar_close=str(last_close), age_min=round(age_min, 1), stale=stale, last_price=float(d.close.iloc[-1]),
                     regime=str(d.regime.iloc[-1]), taken=taken, **led.summary(now))
         status["symbols"][sym] = info
@@ -218,12 +247,13 @@ def main(argv=None) -> int:
     ap = argparse.ArgumentParser(prog="cryptoai")
     ap.add_argument("cmd", choices=["ingest", "backtest", "evaluate", "telegram-test", "status"])
     ap.add_argument("--days", type=int, default=730)
+    ap.add_argument("--budget-min", type=float, default=0, help="stop downloading after this many minutes and resume next run (0 = no limit)")
     a = ap.parse_args(argv)
     s, base = load_settings(), state_dir()
     base.mkdir(parents=True, exist_ok=True)
     if a.cmd == "telegram-test":
         return cmd_telegram_test()
-    return {"ingest": lambda: cmd_ingest(s, base, a.days), "backtest": lambda: cmd_backtest(s, base, a.days),
+    return {"ingest": lambda: cmd_ingest(s, base, a.days, a.budget_min), "backtest": lambda: cmd_backtest(s, base, a.days),
             "evaluate": lambda: cmd_evaluate(s, base), "status": lambda: cmd_status(s, base)}[a.cmd]()
 
 

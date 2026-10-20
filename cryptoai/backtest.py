@@ -310,11 +310,12 @@ def edge_verdict(oos: dict, folds_pos_frac: float | None, base_oos_exp: float | 
 
 # --------------------------------------------------------------- research
 
-def run_research(d: pd.DataFrame, s: Settings, symbol: str, strategy_names=None, engine=None) -> dict:
+def run_research(d: pd.DataFrame, s: Settings, symbol: str, strategy_names=None, engine=None, family_size: int | None = None) -> dict:
     names = list(strategy_names or (*s.enabled_strategies, *s.research_only_strategies))
     dates = sorted(set(d.date))
     sp = chrono_split(dates)
-    level = 1 - 0.05 / max(1, len(names))   # Bonferroni across strategies
+    fam = max(int(family_size or 0), len(names), 1)   # every strategy-by-coin test in the study, not just this coin
+    level = 1 - 0.05 / fam                             # Bonferroni across the whole family
     warnings = []
     if len(dates) < 120:
         warnings.append(f"Only {len(dates)} days of data. Results are very noisy at this size. Run 'Daily ingest and backtest' to build history.")
@@ -364,11 +365,12 @@ def run_research(d: pd.DataFrame, s: Settings, symbol: str, strategy_names=None,
         "baseline_1h_trend": {"out_of_sample": base_oos, "all_sample": metrics(base_t, level)},
         "chart_exits": compare_exits(d, s, symbol, [n for n in names if n in s.enabled_strategies], engine, sp) if engine is not None else None,
         "strategies": results,
-        "multiple_testing": {"strategies_evaluated": len(names), "ci_level_used": round(level, 4),
-                             "note": "Bonferroni-adjusted across strategies. No parameter search was run, so nothing was tuned on the data."},
+        "multiple_testing": {"strategies_evaluated": len(names), "family_size": fam, "ci_level_used": round(level, 5),
+                             "note": f"Bonferroni-adjusted across all {fam} strategy-by-coin tests, so adding coins makes the pass bar stricter. No parameter search was run, so nothing was tuned on the data."},
         "warnings": warnings,
         "limitations": ["Bootstrap CIs ignore serial correlation between trades.",
                         "AERO trades mainly on the Aerodrome DEX on Base; this uses the Coinbase AERO-USD price as a stand-in, so real DEX costs and slippage can differ.",
+                        "Slippage per coin is an assumption (smaller or thinner coins get a larger number). Real fills can be worse, especially in fast markets.",
                         "Only one market regime may be covered; crypto cycles are long.",
                         "Past results do not predict future results."]}
 

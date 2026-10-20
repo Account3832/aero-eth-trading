@@ -1,4 +1,4 @@
-"""AERO + ETH Trading Terminal: read-only dashboard. PAPER ONLY. Nothing here can place an order.
+"""Crypto Trading Terminal (ETH, AERO and the biggest coins): read-only dashboard. PAPER ONLY. Nothing here can place an order.
 
 Reads state written by the scheduled jobs: a local folder (CRYPTOAI_STATE_DIR) or the repo's `data` branch
 (CRYPTOAI_STATE_URL = https://raw.githubusercontent.com/<you>/<repo>/data).
@@ -25,7 +25,7 @@ from cryptoai.config import load_settings
 from cryptoai.data import resample_bars
 
 S = load_settings()
-st.set_page_config(page_title="AERO + ETH Terminal", page_icon="📈", layout="wide")
+st.set_page_config(page_title="Crypto Terminal", page_icon="📈", layout="wide")
 GREEN, RED, AMBER = "#22c55e", "#ef4444", "#f59e0b"
 
 st.markdown("""
@@ -41,7 +41,7 @@ st.markdown("""
 .sig{border-radius:14px;padding:14px 18px;border:1px solid rgba(34,197,94,.55);background:rgba(34,197,94,.10);margin-bottom:10px}
 </style>""", unsafe_allow_html=True)
 
-st.markdown('<div class="app-title">AERO + ETH Trading Terminal</div><div class="app-sub">Paper trading only. Nothing here places an order or touches an exchange.</div>', unsafe_allow_html=True)
+st.markdown('<div class="app-title">Crypto Trading Terminal</div><div class="app-sub">Paper trading only. Nothing here places an order or touches an exchange.</div>', unsafe_allow_html=True)
 
 with st.sidebar:
     st.header("Controls")
@@ -136,6 +136,13 @@ def draw_levels(fig, lv, x0, x1, zones=True, lines=True, pivots=None):
 tabs = st.tabs(["Monitor", "Levels & Trends", "Charts", "2-year results", "Reliability test", "Paper trades", "Data & health", "Logs"])
 
 with tabs[0]:
+    snap = []
+    for c, i in (stt.get("symbols") or {}).items():
+        snap.append({"Coin": c, "Price": P.price(i.get("last_price"), c) if i.get("last_price") else "n/a", "Trend": i.get("regime", ""),
+                     "Strategies that passed the fair test": ", ".join(i.get("proven") or []) or "none yet", "Note": i.get("error", "")})
+    if snap:
+        st.markdown("**All coins at a glance.** A phone alert or practice trade happens only for a strategy listed as passed.")
+        st.dataframe(pd.DataFrame(snap), hide_index=True, use_container_width=True)
     m = mon(sym)
     rows = m.get("rows", [])
     st.caption(f"Checked on candle closing {m.get('bar_close', 'n/a')} UTC. Every strategy is checked, including ones that have not been proven.")
@@ -143,7 +150,7 @@ with tabs[0]:
         st.write("Nothing to show yet.")
     for r in rows:
         if r["status"] == "SIGNAL":
-            st.markdown(f'<div class="sig"><b>BUY signal: {r["strategy"]}</b> ({r["kind"]})<br>'
+            st.markdown(f'<div class="sig"><b>{"BUY signal" if r["kind"] == "Live practice" else "Idea only, not proven, no alert sent"}: {r["strategy"]}</b> ({r["kind"]})<br>'
                         f'Entry about {P.price(r["entry_ref"], sym)} (next candle) · Stop {P.price(r["stop"], sym)} · '
                         f'Target 1 {P.price(r["target1"], sym)} · Target 2 {P.price(r["target2"], sym)}<br>'
                         f'Size about {r["units"]} units ({P.money(r["notional_usd"], 0)}), risk about {P.money(r["risk_usd"], 0)}. Paper only.<br>'

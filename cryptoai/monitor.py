@@ -25,11 +25,26 @@ def _num(x):
         return None
 
 
-def scan(s: Settings, feats: pd.DataFrame, symbol: str, names=None, levels: dict | None = None) -> list[dict]:
-    """One row per strategy for the LAST completed candle of `feats` (output of add_features)."""
+PROVEN = ("EDGE_SUPPORTED", "UNDERLYING_EDGE_SUPPORTED")
+
+
+def proven_strategies(report: dict | None) -> set:
+    """Strategy names whose out-of-sample verdict on this coin is a pass. Anything else is not allowed to trade or text you."""
+    if not isinstance(report, dict):
+        return set()
+    return {n for n, r in (report.get("strategies") or {}).items() if (r or {}).get("verdict") in PROVEN}
+
+
+def scan(s: Settings, feats: pd.DataFrame, symbol: str, names=None, levels: dict | None = None, proven: set | None = None) -> list[dict]:
+    """One row per strategy for the LAST completed candle of `feats` (output of add_features).
+
+    `proven`: when given (and s.alert_only_proven), only those strategies are labelled "Live practice".
+    """
     if feats is None or len(feats) < 50:
         return []
     live = set(s.enabled_strategies)
+    if s.alert_only_proven and proven is not None:
+        live = set(proven)
     names = list(names or (*s.enabled_strategies, *s.research_only_strategies))
     last = feats.iloc[-1]
     atr = _num(last.atr)
@@ -40,7 +55,7 @@ def scan(s: Settings, feats: pd.DataFrame, symbol: str, names=None, levels: dict
         if n not in REGISTRY:
             continue
         inst = REGISTRY[n]()
-        kind = "Live practice" if n in live else ("Comparison" if n == "steady_scalper" else "Research only")
+        kind = "Live practice" if n in live else ("Comparison" if n == "steady_scalper" else ("Not proven" if s.alert_only_proven else "Research only"))
         row = {"symbol": symbol, "strategy": n, "kind": kind, "status": "WAITING", "trigger": "", "entry_ref": None, "stop": None,
                "target1": None, "target2": None, "risk_per_unit": None, "units": None, "notional_usd": None, "risk_usd": None,
                "blended_rr": inst.blended_rr, "atr": atr, "stop_atr": inst.stop_atr, "t1_r": inst.t1_r, "t2_r": inst.t2_r,

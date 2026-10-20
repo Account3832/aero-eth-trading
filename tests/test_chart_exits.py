@@ -198,7 +198,7 @@ def test_evaluate_end_to_end_in_chart_mode():
         for k in ("TELEGRAM_BOT_TOKEN", "TELEGRAM_CHAT_ID"):
             os.environ.pop(k, None)
         _setup(base)
-        s = Settings(exit_mode="chart")
+        s = Settings(exit_mode="chart", symbols=("ETH-USD", "AERO-USD"))
         assert runner.cmd_evaluate(s, base, fetch=False) == 0
         assert (base / "ETH-USD" / "levels.json").exists()
         for sym in s.symbols:

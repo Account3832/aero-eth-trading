@@ -4,3 +4,5 @@ max_risk_pct: 0.5          # pretend risk per trade, percent of the account ($50
 fee_pct: 0.10              # exchange fee per side, percent. Check what YOUR exchange charges.
 entry_minutes: 15          # candle size used for entries (15 is far cheaper in fees than 5)
 notify_research_signals: false   # true = also text you when unproven research rules fire
+alert_only_proven: true    # true = practice trades and phone alerts ONLY for strategies that passed the fair test on that coin
+# symbols: [ETH-USD, AERO-USD, BTC-USD, BNB-USD, XRP-USD, SOL-USD, HYPE-USD, DOGE-USD, ADA-USD, LINK-USD, AVAX-USD, LTC-USD]   # remove coins you do not want

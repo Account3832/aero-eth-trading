@@ -8,6 +8,8 @@ from pathlib import Path
 
 import pandas as pd
 
+from .config import price_decimals
+
 
 def _url() -> str:
     return os.environ.get("CRYPTOAI_STATE_URL", "").rstrip("/")
@@ -73,7 +75,7 @@ def money(x, dp=2) -> str:
 
 
 def price(x, symbol: str) -> str:
-    dp = 5 if symbol.upper().startswith("AERO") else 2
+    dp = price_decimals(symbol)
     return money(x, dp)
 
 

@@ -25,7 +25,7 @@ def test_backtest_and_evaluate_end_to_end():
         for k in ("TELEGRAM_BOT_TOKEN", "TELEGRAM_CHAT_ID"):
             os.environ.pop(k, None)
         _setup(base)
-        s = Settings()
+        s = Settings(symbols=("ETH-USD", "AERO-USD"))
         assert runner.cmd_backtest(s, base, 730) == 0
         for sym in s.symbols:
             assert (base / sym / "backtest_report.json").exists()

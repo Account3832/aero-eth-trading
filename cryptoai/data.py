@@ -15,7 +15,8 @@ from .store import COLS, load_raw, read_json, save_bars, write_json
 
 CB_URL = "https://api.exchange.coinbase.com"
 KRAKEN_URL = "https://api.kraken.com/0/public/OHLC"
-KRAKEN_PAIR = {"ETH-USD": "ETHUSD", "AERO-USD": "AEROUSD", "BTC-USD": "XBTUSD"}
+KRAKEN_PAIR = {"ETH-USD": "ETHUSD", "AERO-USD": "AEROUSD", "BTC-USD": "XBTUSD", "XRP-USD": "XRPUSD", "SOL-USD": "SOLUSD", "DOGE-USD": "XDGUSD",
+               "ADA-USD": "ADAUSD", "LINK-USD": "LINKUSD", "AVAX-USD": "AVAXUSD", "LTC-USD": "LTCUSD", "HYPE-USD": "HYPEUSD", "BNB-USD": "BNBUSD"}
 STEP = pd.Timedelta(minutes=5)
 WINDOW_BARS = 300
 
@@ -148,7 +149,7 @@ def gap_stats(symbol: str, base: Path | None = None) -> dict:
 
 
 def ingest(symbol: str, days: int, now: pd.Timestamp | None = None, base: Path | None = None, get=_get,
-           sleep=time.sleep, log=print) -> dict:
+           sleep=time.sleep, log=print, deadline: float | None = None) -> dict:
     """Backfill and top up stored candles. Forward from the last stored bar; backward to now-days once per target."""
     base = base or state_dir()
     now = (now or pd.Timestamp.now(tz="UTC"))
@@ -165,10 +166,13 @@ def ingest(symbol: str, days: int, now: pd.Timestamp | None = None, base: Path |
         done_to = pd.Timestamp(meta["backfilled_to"]) if meta.get("backfilled_to") else None
         if raw.index[0] - target > pd.Timedelta(days=2) and (done_to is None or done_to > target):
             spans.append((target, raw.index[0] - STEP))
-    added, errors, reqs = 0, [], 0
+    added, errors, reqs, partial = 0, [], 0, False
     for a, b in spans:
         cur = a
         while cur <= b:
+            if deadline is not None and time.monotonic() > deadline:   # out of time: keep what is saved, resume next run
+                partial = True
+                break
             end = min(cur + (WINDOW_BARS - 1) * STEP, b)
             try:
                 chunk = complete_only(fetch_coinbase(symbol, cur, end, get), now)
@@ -185,12 +189,12 @@ def ingest(symbol: str, days: int, now: pd.Timestamp | None = None, base: Path |
             sleep(0.12)
             if reqs % 100 == 0:
                 log(f"  {symbol}: {reqs} requests, {added} new bars so far (at {cur})")
-        if errors and len(errors) >= 3:
+        if (errors and len(errors) >= 3) or partial:
             break
-    if not errors and len(spans) > 1:
+    if not errors and not partial and (len(spans) > 1 or len(raw) == 0):
         meta["backfilled_to"] = str(target)
         write_json(meta_path, meta)
     after = load_raw(symbol, base)
-    return {"symbol": symbol, "ok": not errors, "added": added, "requests": reqs, "errors": errors[:3], "bars": len(after),
+    return {"symbol": symbol, "ok": not errors, "partial": partial, "added": added, "requests": reqs, "errors": errors[:3], "bars": len(after),
             "first": str(after.index[0]) if len(after) else None, "last": str(after.index[-1]) if len(after) else None,
             **gap_stats(symbol, base)}

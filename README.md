@@ -1,8 +1,17 @@
-# AERO + ETH Trading (paper only)
+# Crypto Trading: ETH, AERO and the biggest coins (paper only)
 
-A practice-trading assistant for **ETH-USD** and **AERO-USD**. It runs 24/7 on GitHub, checks the market about every 5-10 minutes,
-and texts your phone through Telegram when a strategy says "buy". **It never places a real order and never touches an exchange.**
-BTC is watched only as background (is the whole market rising or falling?).
+A practice-trading assistant for **ETH-USD**, **AERO-USD** and ten more big coins that trade as COIN-USD on Coinbase
+(BTC, BNB, XRP, SOL, HYPE, DOGE, ADA, LINK, AVAX, LTC; list chosen Oct 2026 by market cap, change it with `symbols` in `config/settings.yaml`).
+It runs 24/7 on GitHub, checks the market about every 5-10 minutes, and texts your phone through Telegram **only when a strategy that has PASSED
+the fair test on that coin says "buy"**. **It never places a real order and never touches an exchange.** BTC is also the background check
+(is the whole market rising or falling?).
+
+## Alerts only for strategies that passed
+`alert_only_proven: true` (default). A strategy may open a practice trade or text you only if the latest 2-year report gives it the verdict
+`EDGE_SUPPORTED` on that coin. Everything else still shows on the dashboard as "Idea only, not proven" with no alert. When nothing has passed
+the app stays quiet on purpose. The pass bar gets stricter as coins are added: the test is corrected for all strategy-by-coin tests together
+(12 coins x 9 strategies = 108 tests), otherwise testing many coins would hand out lucky passes. Practice trades already open when you
+switch this on are still managed and closed normally.
 
 ## Honest warnings
 - **No strategy here is proven.** The app replays and fairly tests each one and shows you the truth, including failures.
@@ -13,13 +22,13 @@ BTC is watched only as background (is the whole market rising or falling?).
 ## Strategies (chosen for how crypto behaves, not copied from stocks; none tuned on data)
 | Name | Idea | Status |
 |---|---|---|
-| trend_pullback | Buy a dip inside a rising 1h and 4h trend | live practice |
-| donchian_breakout | Break above the 24-hour high on strong volume (crypto trends persist) | live practice |
-| squeeze_breakout | Quiet, tight price range then a breakout (volatility comes in waves) | live practice |
-| oversold_bounce | Sharp "liquidation wick" flush, then price reclaims the level | live practice |
-| support_bounce | In an uptrend, a dip to the last higher low that gets rejected (classic support) | research only |
-| swing_breakout | Strong close above the last swing high on volume (classic resistance break) | research only |
-| range_bounce, btc_lead, steady_scalper | Comparison ideas | research only (no practice trades) |
+| trend_pullback | Buy a dip inside a rising 1h and 4h trend | tested; trades only after a pass |
+| donchian_breakout | Break above the 24-hour high on strong volume (crypto trends persist) | tested; trades only after a pass |
+| squeeze_breakout | Quiet, tight price range then a breakout (volatility comes in waves) | tested; trades only after a pass |
+| oversold_bounce | Sharp "liquidation wick" flush, then price reclaims the level | tested; trades only after a pass |
+| support_bounce | In an uptrend, a dip to the last higher low that gets rejected (classic support) | tested; trades only after a pass |
+| swing_breakout | Strong close above the last swing high on volume (classic resistance break) | tested; trades only after a pass |
+| range_bounce, btc_lead, steady_scalper | Comparison ideas | comparison; trades only after a pass |
 
 Practice trades are limited: 1 per coin at a time, 2 total, 6 a day per coin, stop trading for the day after losing 2%.
 
@@ -50,6 +59,7 @@ Alerts always show the chart-based alternative too. If the trend structure break
    - `.github/workflows/research.yml`
    - `.github/workflows/telegram-test.yml`
    - `.github/workflows/ci.yml`
+   - `.github/workflows/keepalive.yml`
    - `.streamlit/config.toml`
    - `.gitignore`
 
@@ -62,11 +72,15 @@ Alerts always show the chart-based alternative too. If the trend structure break
 
 **Step 4. Load 2 years of data and run the fair test (once)**
 1. **Actions** > **Research and ingest** > **Run workflow** > leave 730 > **Run workflow**.
-2. Wait. It can take 20-60 minutes. A green check means done. (Red X? Click it and copy me the last red lines.)
+2. Wait. With 12 coins one run may not finish: each run stops cleanly after 70 minutes and keeps what it saved. If the log ends with
+   `NOT FINISHED YET`, click **Run workflow** again (the daily run also continues it). Repeat until that line is gone. Coins with under 90 days
+   of history are skipped by the test until they have enough. (Red X? Click it and copy me the last red lines.)
 
 **Step 5. Start the 24/7 checker**
 1. **Actions** > **Evaluate (paper only, 24/7)** > **Run workflow** once to test. After that it runs by itself every ~5 minutes.
-2. GitHub **pauses scheduled jobs after 60 days with no repo activity**. If alerts stop, open Actions and click **Enable workflow**.
+2. GitHub **pauses scheduled jobs after 60 days with no repo activity**. The weekly **Keep scheduled jobs alive** workflow (`keepalive.yml`) prevents that
+   by re-enabling the schedules and adding an empty commit when the repo has been quiet for 20 days. If it ever does get paused anyway (for example you
+   turned everything off for two months), open Actions and click **Enable workflow** on each one.
 
 **Step 6. The dashboard (free)**
 1. Go to share.streamlit.io, sign in with GitHub, **Create app**, pick the repo `aero-eth-trading`, branch `main`, main file `dashboard/app.py`.
