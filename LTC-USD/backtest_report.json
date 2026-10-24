@@ -1,0 +1,3393 @@
+{
+  "report_type": "CRYPTO SPOT PRICE-SIGNAL RESEARCH for LTC-USD. Long-only. Paper only.",
+  "symbol": "LTC-USD",
+  "generated_at": "2026-10-24 03:51:08.354849+00:00",
+  "data": {
+    "first": "2024-10-20 00:00:00+00:00",
+    "last": "2026-10-24 03:30:00+00:00",
+    "bars": 70479,
+    "days": 735,
+    "splits_days": {
+      "train": 367,
+      "val": 184,
+      "oos": 184
+    },
+    "buy_and_hold_oos_pct": 1.9
+  },
+  "assumptions": {
+    "entry_candle_minutes": 15,
+    "fee_pct_per_side": 0.1,
+    "slippage_pct_per_side": 0.05,
+    "entry": "next bar open + slippage",
+    "ambiguous_bars": "stop first",
+    "target_fill": "requires trade-through by the slippage buffer",
+    "max_trades_per_day": 6,
+    "cooldown_minutes": 30,
+    "direction": "long only (spot)"
+  },
+  "baseline_1h_trend": {
+    "out_of_sample": {
+      "trades": 68,
+      "win_rate": 0.382,
+      "avg_win_R": 1.222,
+      "avg_loss_R": -1.531,
+      "gross_expectancy_R": 0.15,
+      "net_expectancy_R": -0.478,
+      "cost_per_trade_R": 0.628,
+      "total_net_R": -32.52,
+      "profit_factor": 0.49,
+      "max_drawdown_R": 30.87,
+      "longest_losing_streak": 5,
+      "t_stat": -2.7,
+      "ci_level": 0.9995,
+      "ci_low": -1.035,
+      "ci_high": 0.13
+    },
+    "all_sample": {
+      "trades": 250,
+      "win_rate": 0.36,
+      "avg_win_R": 1.121,
+      "avg_loss_R": -1.426,
+      "gross_expectancy_R": -0.007,
+      "net_expectancy_R": -0.509,
+      "cost_per_trade_R": 0.502,
+      "total_net_R": -127.27,
+      "profit_factor": 0.44,
+      "max_drawdown_R": 125.69,
+      "longest_losing_streak": 10,
+      "t_stat": -6.1,
+      "ci_level": 0.9995,
+      "ci_low": -0.794,
+      "ci_high": -0.254
+    }
+  },
+  "chart_exits": {
+    "question": "At the same dollar risk per trade, do stops and targets taken from support/resistance zones earn more than fixed ATR exits on the same entries?",
+    "pooled_out_of_sample": {
+      "paired_trades": 69,
+      "mean_difference_R": 0.11,
+      "ci_low": -0.15,
+      "ci_high": 0.382,
+      "atr_exp_R": -0.288,
+      "chart_exp_R": -0.178
+    },
+    "pooled_all_sample": {
+      "paired_trades": 254,
+      "mean_difference_R": 0.074,
+      "ci_low": -0.047,
+      "ci_high": 0.198,
+      "atr_exp_R": -0.42,
+      "chart_exp_R": -0.347
+    },
+    "verdict": "INSUFFICIENT_SAMPLE",
+    "verdict_reason": "only 69 paired out-of-sample trades; at least 100 are needed",
+    "per_strategy": {
+      "trend_pullback": {
+        "all_sample": {
+          "trades": 694,
+          "with_chart_plan": 125,
+          "skipped_no_clean_plan": 569,
+          "skip_reasons": {
+            "stop would be too wide": 283,
+            "no room before resistance": 280,
+            "no support zone for a stop": 5,
+            "chart analysis unavailable": 1
+          },
+          "atr_exp_R_all": -0.529,
+          "atr_total_R_all": -367.4,
+          "atr_exp_R_same_trades": -0.388,
+          "chart_exp_R_same_trades": -0.273,
+          "mean_difference_R": 0.115,
+          "diff_ci_low": -0.012,
+          "diff_ci_high": 0.263,
+          "chart_total_R_skips_as_zero": -34.1,
+          "chart_win_rate": 0.36,
+          "atr_win_rate_same_trades": 0.376
+        },
+        "out_of_sample": {
+          "trades": 186,
+          "with_chart_plan": 42,
+          "skipped_no_clean_plan": 144,
+          "skip_reasons": {
+            "stop would be too wide": 73,
+            "no room before resistance": 70,
+            "no support zone for a stop": 1
+          },
+          "atr_exp_R_all": -0.574,
+          "atr_total_R_all": -106.7,
+          "atr_exp_R_same_trades": -0.277,
+          "chart_exp_R_same_trades": -0.088,
+          "mean_difference_R": 0.189,
+          "diff_ci_low": -0.047,
+          "diff_ci_high": 0.459,
+          "chart_total_R_skips_as_zero": -3.7,
+          "chart_win_rate": 0.429,
+          "atr_win_rate_same_trades": 0.452
+        }
+      },
+      "donchian_breakout": {
+        "all_sample": {
+          "trades": 285,
+          "with_chart_plan": 91,
+          "skipped_no_clean_plan": 194,
+          "skip_reasons": {
+            "no room before resistance": 106,
+            "stop would be too wide": 87,
+            "no support zone for a stop": 1
+          },
+          "atr_exp_R_all": -0.369,
+          "atr_total_R_all": -105.2,
+          "atr_exp_R_same_trades": -0.375,
+          "chart_exp_R_same_trades": -0.39,
+          "mean_difference_R": -0.015,
+          "diff_ci_low": -0.26,
+          "diff_ci_high": 0.234,
+          "chart_total_R_skips_as_zero": -35.5,
+          "chart_win_rate": 0.297,
+          "atr_win_rate_same_trades": 0.319
+        },
+        "out_of_sample": {
+          "trades": 62,
+          "with_chart_plan": 18,
+          "skipped_no_clean_plan": 44,
+          "skip_reasons": {
+            "no room before resistance": 25,
+            "stop would be too wide": 19
+          },
+          "atr_exp_R_all": -0.425,
+          "atr_total_R_all": -26.3,
+          "atr_exp_R_same_trades": -0.247,
+          "chart_exp_R_same_trades": -0.592,
+          "mean_difference_R": -0.345,
+          "diff_ci_low": -0.978,
+          "diff_ci_high": 0.191,
+          "chart_total_R_skips_as_zero": -10.7,
+          "chart_win_rate": 0.278,
+          "atr_win_rate_same_trades": 0.389
+        }
+      },
+      "squeeze_breakout": {
+        "all_sample": {
+          "trades": 171,
+          "with_chart_plan": 35,
+          "skipped_no_clean_plan": 136,
+          "skip_reasons": {
+            "stop would be too wide": 79,
+            "no room before resistance": 57
+          },
+          "atr_exp_R_all": -0.781,
+          "atr_total_R_all": -133.6,
+          "atr_exp_R_same_trades": -0.728,
+          "chart_exp_R_same_trades": -0.622,
+          "mean_difference_R": 0.106,
+          "diff_ci_low": -0.214,
+          "diff_ci_high": 0.466,
+          "chart_total_R_skips_as_zero": -21.8,
+          "chart_win_rate": 0.229,
+          "atr_win_rate_same_trades": 0.286
+        },
+        "out_of_sample": {
+          "trades": 34,
+          "with_chart_plan": 8,
+          "skipped_no_clean_plan": 26,
+          "skip_reasons": {
+            "stop would be too wide": 19,
+            "no room before resistance": 7
+          },
+          "atr_exp_R_all": -0.737,
+          "atr_total_R_all": -25.1,
+          "atr_exp_R_same_trades": -0.63,
+          "chart_exp_R_same_trades": 0.037,
+          "mean_difference_R": 0.667,
+          "diff_ci_low": -0.228,
+          "diff_ci_high": 1.877,
+          "chart_total_R_skips_as_zero": 0.3,
+          "chart_win_rate": 0.5,
+          "atr_win_rate_same_trades": 0.375
+        }
+      },
+      "oversold_bounce": {
+        "all_sample": {
+          "trades": 109,
+          "with_chart_plan": 3,
+          "skipped_no_clean_plan": 106,
+          "skip_reasons": {
+            "no room before resistance": 62,
+            "stop would be too wide": 42,
+            "no support zone for a stop": 2
+          },
+          "atr_exp_R_all": -0.479,
+          "atr_total_R_all": -52.3,
+          "atr_exp_R_same_trades": 0.425,
+          "chart_exp_R_same_trades": 1.095,
+          "mean_difference_R": 0.67,
+          "diff_ci_low": 0.024,
+          "diff_ci_high": 1.439,
+          "chart_total_R_skips_as_zero": 3.3,
+          "chart_win_rate": 0.667,
+          "atr_win_rate_same_trades": 0.667
+        },
+        "out_of_sample": {
+          "trades": 15,
+          "with_chart_plan": 1,
+          "skipped_no_clean_plan": 14,
+          "skip_reasons": {
+            "no room before resistance": 10,
+            "stop would be too wide": 4
+          },
+          "atr_exp_R_all": -0.099,
+          "atr_total_R_all": -1.5,
+          "atr_exp_R_same_trades": 1.215,
+          "chart_exp_R_same_trades": 1.762,
+          "mean_difference_R": 0.547,
+          "diff_ci_low": NaN,
+          "diff_ci_high": NaN,
+          "chart_total_R_skips_as_zero": 1.8,
+          "chart_win_rate": 1.0,
+          "atr_win_rate_same_trades": 1.0
+        }
+      }
+    },
+    "notes": [
+      "Compared on identical entries; R is measured against each method's own stop, so both risk the same dollars per trade.",
+      "Trades with no clean chart plan are passed by the chart method; see the skip counts and the 'skips as zero' totals.",
+      "Chart zones at each entry use only candles that had closed by then."
+    ]
+  },
+  "strategies": {
+    "trend_pullback": {
+      "label": "trend_pullback@1.0#1458e1ec",
+      "spec": {
+        "name": "trend_pullback",
+        "version": "1.0",
+        "hypothesis": "When the 1-hour and 4-hour trends are up, a shallow dip to the 21-bar average that is bought back tends to continue up.",
+        "why_crypto": "Crypto trends persist for hours to days, and dips in a trend are bought quickly because the market never closes.",
+        "trigger": "close of the candle above the prior candle's high after touching the 21-bar average, with the 1h and 4h trend up and Bitcoin not falling.",
+        "stop_logic": "1.5 x ATR below entry.",
+        "targets": "Half at 1.5R, half at 3R (stop to entry after the first).",
+        "holding": "30 minutes to 6 hours"
+      },
+      "stop_atr": 1.5,
+      "t1_r": 1.5,
+      "t2_r": 3.0,
+      "blended_rr": 2.25,
+      "all_sample_in_sample_reference": {
+        "trades": 694,
+        "win_rate": 0.327,
+        "avg_win_R": 1.102,
+        "avg_loss_R": -1.322,
+        "gross_expectancy_R": -0.085,
+        "net_expectancy_R": -0.529,
+        "cost_per_trade_R": 0.444,
+        "total_net_R": -367.44,
+        "profit_factor": 0.41,
+        "max_drawdown_R": 366.1,
+        "longest_losing_streak": 13,
+        "t_stat": -11.31,
+        "ci_level": 0.9995,
+        "ci_low": -0.685,
+        "ci_high": -0.386
+      },
+      "train": {
+        "trades": 349,
+        "win_rate": 0.35,
+        "avg_win_R": 1.157,
+        "avg_loss_R": -1.253,
+        "gross_expectancy_R": -0.042,
+        "net_expectancy_R": -0.411,
+        "cost_per_trade_R": 0.369,
+        "total_net_R": -143.41,
+        "profit_factor": 0.5,
+        "max_drawdown_R": 144.31,
+        "longest_losing_streak": 13,
+        "t_stat": -6.14,
+        "ci_level": 0.9995,
+        "ci_low": -0.618,
+        "ci_high": -0.184
+      },
+      "validation": {
+        "trades": 159,
+        "win_rate": 0.258,
+        "avg_win_R": 1.022,
+        "avg_loss_R": -1.349,
+        "gross_expectancy_R": -0.235,
+        "net_expectancy_R": -0.738,
+        "cost_per_trade_R": 0.503,
+        "total_net_R": -117.3,
+        "profit_factor": 0.26,
+        "max_drawdown_R": 116.8,
+        "longest_losing_streak": 11,
+        "t_stat": -8.18,
+        "ci_level": 0.9995,
+        "ci_low": -1.021,
+        "ci_high": -0.363
+      },
+      "out_of_sample_reported_once": {
+        "trades": 186,
+        "win_rate": 0.344,
+        "avg_win_R": 1.049,
+        "avg_loss_R": -1.425,
+        "gross_expectancy_R": -0.038,
+        "net_expectancy_R": -0.574,
+        "cost_per_trade_R": 0.535,
+        "total_net_R": -106.73,
+        "profit_factor": 0.39,
+        "max_drawdown_R": 105.92,
+        "longest_losing_streak": 10,
+        "t_stat": -6.21,
+        "ci_level": 0.9995,
+        "ci_low": -0.878,
+        "ci_high": -0.235
+      },
+      "walk_forward_folds": [
+        {
+          "test": "2024-12-19..2025-01-17",
+          "trades": 28,
+          "net_expectancy_R": -0.516
+        },
+        {
+          "test": "2025-01-18..2025-02-16",
+          "trades": 35,
+          "net_expectancy_R": -0.153
+        },
+        {
+          "test": "2025-02-17..2025-03-18",
+          "trades": 18,
+          "net_expectancy_R": -0.493
+        },
+        {
+          "test": "2025-03-19..2025-04-17",
+          "trades": 20,
+          "net_expectancy_R": -0.591
+        },
+        {
+          "test": "2025-04-18..2025-05-17",
+          "trades": 34,
+          "net_expectancy_R": -0.069
+        },
+        {
+          "test": "2025-05-18..2025-06-16",
+          "trades": 24,
+          "net_expectancy_R": -0.601
+        },
+        {
+          "test": "2025-06-17..2025-07-16",
+          "trades": 39,
+          "net_expectancy_R": -0.638
+        },
+        {
+          "test": "2025-07-17..2025-08-15",
+          "trades": 34,
+          "net_expectancy_R": -0.372
+        },
+        {
+          "test": "2025-08-16..2025-09-14",
+          "trades": 29,
+          "net_expectancy_R": -0.887
+        },
+        {
+          "test": "2025-09-15..2025-10-14",
+          "trades": 22,
+          "net_expectancy_R": -0.102
+        },
+        {
+          "test": "2025-10-15..2025-11-13",
+          "trades": 29,
+          "net_expectancy_R": -0.606
+        },
+        {
+          "test": "2025-11-14..2025-12-13",
+          "trades": 18,
+          "net_expectancy_R": -0.495
+        },
+        {
+          "test": "2025-12-14..2026-01-12",
+          "trades": 25,
+          "net_expectancy_R": -1.031
+        },
+        {
+          "test": "2026-01-13..2026-02-11",
+          "trades": 13,
+          "net_expectancy_R": -1.074
+        },
+        {
+          "test": "2026-02-12..2026-03-13",
+          "trades": 32,
+          "net_expectancy_R": -0.75
+        },
+        {
+          "test": "2026-03-14..2026-04-12",
+          "trades": 30,
+          "net_expectancy_R": -0.595
+        },
+        {
+          "test": "2026-04-13..2026-05-12",
+          "trades": 39,
+          "net_expectancy_R": -0.634
+        },
+        {
+          "test": "2026-05-13..2026-06-11",
+          "trades": 10,
+          "net_expectancy_R": -0.896
+        },
+        {
+          "test": "2026-06-12..2026-07-11",
+          "trades": 36,
+          "net_expectancy_R": -0.729
+        },
+        {
+          "test": "2026-07-12..2026-08-10",
+          "trades": 26,
+          "net_expectancy_R": -0.373
+        },
+        {
+          "test": "2026-08-11..2026-09-09",
+          "trades": 38,
+          "net_expectancy_R": -0.418
+        },
+        {
+          "test": "2026-09-10..2026-10-09",
+          "trades": 41,
+          "net_expectancy_R": -0.59
+        },
+        {
+          "test": "2026-10-10..2026-10-24",
+          "trades": 13,
+          "net_expectancy_R": -0.818
+        }
+      ],
+      "folds_positive_fraction": 0.0,
+      "by_regime_descriptive": {
+        "transition": {
+          "trades": 187,
+          "win_rate": 0.294,
+          "net_expectancy_R": -0.687,
+          "total_net_R": -128.48
+        },
+        "trend": {
+          "trades": 507,
+          "win_rate": 0.339,
+          "net_expectancy_R": -0.471,
+          "total_net_R": -238.96
+        }
+      },
+      "by_time_block_descriptive": {
+        "00-04h UTC": {
+          "trades": 120,
+          "win_rate": 0.292,
+          "net_expectancy_R": -0.605,
+          "total_net_R": -72.57
+        },
+        "04-08h UTC": {
+          "trades": 103,
+          "win_rate": 0.311,
+          "net_expectancy_R": -0.506,
+          "total_net_R": -52.1
+        },
+        "08-12h UTC": {
+          "trades": 106,
+          "win_rate": 0.283,
+          "net_expectancy_R": -0.72,
+          "total_net_R": -76.33
+        },
+        "12-16h UTC": {
+          "trades": 146,
+          "win_rate": 0.301,
+          "net_expectancy_R": -0.59,
+          "total_net_R": -86.1
+        },
+        "16-20h UTC": {
+          "trades": 118,
+          "win_rate": 0.407,
+          "net_expectancy_R": -0.305,
+          "total_net_R": -35.94
+        },
+        "20-24h UTC": {
+          "trades": 101,
+          "win_rate": 0.376,
+          "net_expectancy_R": -0.44,
+          "total_net_R": -44.4
+        }
+      },
+      "cost_sensitivity_out_of_sample": {
+        "rows": [
+          {
+            "fee_pct": 0.0,
+            "net_expectancy_R": -0.203,
+            "win_rate": 0.36,
+            "total_net_R": -37.8
+          },
+          {
+            "fee_pct": 0.02,
+            "net_expectancy_R": -0.277,
+            "win_rate": 0.355,
+            "total_net_R": -51.6
+          },
+          {
+            "fee_pct": 0.05,
+            "net_expectancy_R": -0.389,
+            "win_rate": 0.355,
+            "total_net_R": -72.3
+          },
+          {
+            "fee_pct": 0.1,
+            "net_expectancy_R": -0.574,
+            "win_rate": 0.344,
+            "total_net_R": -106.7
+          },
+          {
+            "fee_pct": 0.2,
+            "net_expectancy_R": -0.944,
+            "win_rate": 0.285,
+            "total_net_R": -175.7
+          },
+          {
+            "fee_pct": 0.4,
+            "net_expectancy_R": -1.685,
+            "win_rate": 0.14,
+            "total_net_R": -313.5
+          }
+        ],
+        "breakeven_fee_pct": -0.055,
+        "note": "Fee per side as % of trade value. If the break-even fee is below your real fee, the average trade loses money."
+      },
+      "cost_sensitivity_all_sample": {
+        "rows": [
+          {
+            "fee_pct": 0.0,
+            "net_expectancy_R": -0.222,
+            "win_rate": 0.341,
+            "total_net_R": -154.4
+          },
+          {
+            "fee_pct": 0.02,
+            "net_expectancy_R": -0.284,
+            "win_rate": 0.337,
+            "total_net_R": -197.0
+          },
+          {
+            "fee_pct": 0.05,
+            "net_expectancy_R": -0.376,
+            "win_rate": 0.331,
+            "total_net_R": -260.9
+          },
+          {
+            "fee_pct": 0.1,
+            "net_expectancy_R": -0.529,
+            "win_rate": 0.327,
+            "total_net_R": -367.4
+          },
+          {
+            "fee_pct": 0.2,
+            "net_expectancy_R": -0.836,
+            "win_rate": 0.272,
+            "total_net_R": -580.5
+          },
+          {
+            "fee_pct": 0.4,
+            "net_expectancy_R": -1.45,
+            "win_rate": 0.18,
+            "total_net_R": -1006.6
+          }
+        ],
+        "breakeven_fee_pct": -0.072,
+        "note": "Fee per side as % of trade value. If the break-even fee is below your real fee, the average trade loses money."
+      },
+      "top_day_share_of_total_R": null,
+      "verdict": "FAILED_OOS",
+      "verdict_reason": "out-of-sample net expectancy -0.574R and the CI upper bound -0.235R is below zero"
+    },
+    "donchian_breakout": {
+      "label": "donchian_breakout@1.0#2c43d62c",
+      "spec": {
+        "name": "donchian_breakout",
+        "version": "1.0",
+        "hypothesis": "A strong close above the highest price of the last 24 hours, on heavy volume, tends to keep running.",
+        "why_crypto": "Crypto momentum is persistent, and with no market close, breakouts are not erased by an overnight gap-and-fade.",
+        "trigger": "First candle close above the prior 24-hour high, closing in the top 30% of its range, with volume at least 1.5x normal.",
+        "stop_logic": "2 x ATR below entry (breakouts need room).",
+        "targets": "Half at 1.5R, half at 3R.",
+        "holding": "1 to 12 hours"
+      },
+      "stop_atr": 2.0,
+      "t1_r": 1.5,
+      "t2_r": 3.0,
+      "blended_rr": 2.25,
+      "all_sample_in_sample_reference": {
+        "trades": 285,
+        "win_rate": 0.337,
+        "avg_win_R": 1.325,
+        "avg_loss_R": -1.23,
+        "gross_expectancy_R": -0.059,
+        "net_expectancy_R": -0.369,
+        "cost_per_trade_R": 0.31,
+        "total_net_R": -105.2,
+        "profit_factor": 0.55,
+        "max_drawdown_R": 105.63,
+        "longest_losing_streak": 10,
+        "t_stat": -4.83,
+        "ci_level": 0.9995,
+        "ci_low": -0.597,
+        "ci_high": -0.128
+      },
+      "train": {
+        "trades": 164,
+        "win_rate": 0.348,
+        "avg_win_R": 1.371,
+        "avg_loss_R": -1.182,
+        "gross_expectancy_R": -0.037,
+        "net_expectancy_R": -0.295,
+        "cost_per_trade_R": 0.258,
+        "total_net_R": -48.34,
+        "profit_factor": 0.62,
+        "max_drawdown_R": 48.35,
+        "longest_losing_streak": 9,
+        "t_stat": -2.91,
+        "ci_level": 0.9995,
+        "ci_low": -0.606,
+        "ci_high": 0.015
+      },
+      "validation": {
+        "trades": 59,
+        "win_rate": 0.322,
+        "avg_win_R": 1.075,
+        "avg_loss_R": -1.274,
+        "gross_expectancy_R": -0.154,
+        "net_expectancy_R": -0.518,
+        "cost_per_trade_R": 0.364,
+        "total_net_R": -30.54,
+        "profit_factor": 0.4,
+        "max_drawdown_R": 35.32,
+        "longest_losing_streak": 10,
+        "t_stat": -3.34,
+        "ci_level": 0.9995,
+        "ci_low": -0.933,
+        "ci_high": -0.033
+      },
+      "out_of_sample_reported_once": {
+        "trades": 62,
+        "win_rate": 0.323,
+        "avg_win_R": 1.431,
+        "avg_loss_R": -1.308,
+        "gross_expectancy_R": -0.03,
+        "net_expectancy_R": -0.425,
+        "cost_per_trade_R": 0.395,
+        "total_net_R": -26.32,
+        "profit_factor": 0.52,
+        "max_drawdown_R": 28.57,
+        "longest_losing_streak": 9,
+        "t_stat": -2.45,
+        "ci_level": 0.9995,
+        "ci_low": -0.982,
+        "ci_high": 0.176
+      },
+      "walk_forward_folds": [
+        {
+          "test": "2024-12-19..2025-01-17",
+          "trades": 12,
+          "net_expectancy_R": -0.288
+        },
+        {
+          "test": "2025-01-18..2025-02-16",
+          "trades": 12,
+          "net_expectancy_R": -0.162
+        },
+        {
+          "test": "2025-02-17..2025-03-18",
+          "trades": 6,
+          "net_expectancy_R": 0.158
+        },
+        {
+          "test": "2025-03-19..2025-04-17",
+          "trades": 12,
+          "net_expectancy_R": -0.865
+        },
+        {
+          "test": "2025-04-18..2025-05-17",
+          "trades": 15,
+          "net_expectancy_R": -0.1
+        },
+        {
+          "test": "2025-05-18..2025-06-16",
+          "trades": 11,
+          "net_expectancy_R": -0.507
+        },
+        {
+          "test": "2025-06-17..2025-07-16",
+          "trades": 18,
+          "net_expectancy_R": -0.064
+        },
+        {
+          "test": "2025-07-17..2025-08-15",
+          "trades": 18,
+          "net_expectancy_R": -0.505
+        },
+        {
+          "test": "2025-08-16..2025-09-14",
+          "trades": 15,
+          "net_expectancy_R": -0.381
+        },
+        {
+          "test": "2025-09-15..2025-10-14",
+          "trades": 14,
+          "net_expectancy_R": -0.397
+        },
+        {
+          "test": "2025-10-15..2025-11-13",
+          "trades": 10,
+          "net_expectancy_R": 0.21
+        },
+        {
+          "test": "2025-11-14..2025-12-13",
+          "trades": 8,
+          "net_expectancy_R": -0.325
+        },
+        {
+          "test": "2025-12-14..2026-01-12",
+          "trades": 14,
+          "net_expectancy_R": -0.895
+        },
+        {
+          "test": "2026-01-13..2026-02-11",
+          "trades": 5,
+          "net_expectancy_R": -1.247
+        },
+        {
+          "test": "2026-02-12..2026-03-13",
+          "trades": 10,
+          "net_expectancy_R": -0.681
+        },
+        {
+          "test": "2026-03-14..2026-04-12",
+          "trades": 9,
+          "net_expectancy_R": -0.074
+        },
+        {
+          "test": "2026-04-13..2026-05-12",
+          "trades": 13,
+          "net_expectancy_R": -0.358
+        },
+        {
+          "test": "2026-05-13..2026-06-11",
+          "trades": 2,
+          "net_expectancy_R": -0.428
+        },
+        {
+          "test": "2026-06-12..2026-07-11",
+          "trades": 12,
+          "net_expectancy_R": -0.79
+        },
+        {
+          "test": "2026-07-12..2026-08-10",
+          "trades": 13,
+          "net_expectancy_R": -0.596
+        },
+        {
+          "test": "2026-08-11..2026-09-09",
+          "trades": 10,
+          "net_expectancy_R": -0.438
+        },
+        {
+          "test": "2026-09-10..2026-10-09",
+          "trades": 13,
+          "net_expectancy_R": -0.161
+        },
+        {
+          "test": "2026-10-10..2026-10-24",
+          "trades": 4,
+          "net_expectancy_R": -0.599
+        }
+      ],
+      "folds_positive_fraction": 0.08695652173913043,
+      "by_regime_descriptive": {
+        "range": {
+          "trades": 47,
+          "win_rate": 0.213,
+          "net_expectancy_R": -0.687,
+          "total_net_R": -32.3
+        },
+        "transition": {
+          "trades": 55,
+          "win_rate": 0.345,
+          "net_expectancy_R": -0.331,
+          "total_net_R": -18.21
+        },
+        "trend": {
+          "trades": 183,
+          "win_rate": 0.366,
+          "net_expectancy_R": -0.299,
+          "total_net_R": -54.7
+        }
+      },
+      "by_time_block_descriptive": {
+        "00-04h UTC": {
+          "trades": 56,
+          "win_rate": 0.321,
+          "net_expectancy_R": -0.431,
+          "total_net_R": -24.12
+        },
+        "04-08h UTC": {
+          "trades": 36,
+          "win_rate": 0.361,
+          "net_expectancy_R": -0.341,
+          "total_net_R": -12.27
+        },
+        "08-12h UTC": {
+          "trades": 25,
+          "win_rate": 0.24,
+          "net_expectancy_R": -0.512,
+          "total_net_R": -12.8
+        },
+        "12-16h UTC": {
+          "trades": 76,
+          "win_rate": 0.329,
+          "net_expectancy_R": -0.371,
+          "total_net_R": -28.23
+        },
+        "16-20h UTC": {
+          "trades": 50,
+          "win_rate": 0.36,
+          "net_expectancy_R": -0.332,
+          "total_net_R": -16.61
+        },
+        "20-24h UTC": {
+          "trades": 42,
+          "win_rate": 0.381,
+          "net_expectancy_R": -0.266,
+          "total_net_R": -11.17
+        }
+      },
+      "cost_sensitivity_out_of_sample": {
+        "rows": [
+          {
+            "fee_pct": 0.0,
+            "net_expectancy_R": -0.149,
+            "win_rate": 0.339,
+            "total_net_R": -9.2
+          },
+          {
+            "fee_pct": 0.02,
+            "net_expectancy_R": -0.204,
+            "win_rate": 0.339,
+            "total_net_R": -12.6
+          },
+          {
+            "fee_pct": 0.05,
+            "net_expectancy_R": -0.287,
+            "win_rate": 0.339,
+            "total_net_R": -17.8
+          },
+          {
+            "fee_pct": 0.1,
+            "net_expectancy_R": -0.425,
+            "win_rate": 0.323,
+            "total_net_R": -26.3
+          },
+          {
+            "fee_pct": 0.2,
+            "net_expectancy_R": -0.7,
+            "win_rate": 0.306,
+            "total_net_R": -43.4
+          },
+          {
+            "fee_pct": 0.4,
+            "net_expectancy_R": -1.252,
+            "win_rate": 0.21,
+            "total_net_R": -77.6
+          }
+        ],
+        "breakeven_fee_pct": -0.054,
+        "note": "Fee per side as % of trade value. If the break-even fee is below your real fee, the average trade loses money."
+      },
+      "cost_sensitivity_all_sample": {
+        "rows": [
+          {
+            "fee_pct": 0.0,
+            "net_expectancy_R": -0.154,
+            "win_rate": 0.34,
+            "total_net_R": -43.9
+          },
+          {
+            "fee_pct": 0.02,
+            "net_expectancy_R": -0.197,
+            "win_rate": 0.34,
+            "total_net_R": -56.2
+          },
+          {
+            "fee_pct": 0.05,
+            "net_expectancy_R": -0.262,
+            "win_rate": 0.34,
+            "total_net_R": -74.6
+          },
+          {
+            "fee_pct": 0.1,
+            "net_expectancy_R": -0.369,
+            "win_rate": 0.337,
+            "total_net_R": -105.2
+          },
+          {
+            "fee_pct": 0.2,
+            "net_expectancy_R": -0.584,
+            "win_rate": 0.323,
+            "total_net_R": -166.5
+          },
+          {
+            "fee_pct": 0.4,
+            "net_expectancy_R": -1.014,
+            "win_rate": 0.253,
+            "total_net_R": -289.0
+          }
+        ],
+        "breakeven_fee_pct": -0.072,
+        "note": "Fee per side as % of trade value. If the break-even fee is below your real fee, the average trade loses money."
+      },
+      "top_day_share_of_total_R": null,
+      "verdict": "INSUFFICIENT_SAMPLE",
+      "verdict_reason": "only 62 out-of-sample trades; at least 100 are required before any claim"
+    },
+    "squeeze_breakout": {
+      "label": "squeeze_breakout@1.0#85bf601a",
+      "spec": {
+        "name": "squeeze_breakout",
+        "version": "1.0",
+        "hypothesis": "After an unusually quiet stretch, price often breaks out fast. Buy the first strong close above the upper band.",
+        "why_crypto": "Crypto volatility comes in clusters: long quiet squeezes are followed by sharp moves.",
+        "trigger": "Price range in the quietest fifth of the last week for most of the last hour (or last four candles), then a close above the upper Bollinger band on above-normal volume.",
+        "stop_logic": "1.5 x ATR below entry.",
+        "targets": "Half at 1.5R, half at 3R.",
+        "holding": "30 minutes to 6 hours"
+      },
+      "stop_atr": 1.5,
+      "t1_r": 1.5,
+      "t2_r": 3.0,
+      "blended_rr": 2.25,
+      "all_sample_in_sample_reference": {
+        "trades": 171,
+        "win_rate": 0.269,
+        "avg_win_R": 1.049,
+        "avg_loss_R": -1.455,
+        "gross_expectancy_R": -0.231,
+        "net_expectancy_R": -0.781,
+        "cost_per_trade_R": 0.551,
+        "total_net_R": -133.61,
+        "profit_factor": 0.27,
+        "max_drawdown_R": 132.02,
+        "longest_losing_streak": 16,
+        "t_stat": -8.57,
+        "ci_level": 0.9995,
+        "ci_low": -1.069,
+        "ci_high": -0.415
+      },
+      "train": {
+        "trades": 99,
+        "win_rate": 0.293,
+        "avg_win_R": 1.071,
+        "avg_loss_R": -1.379,
+        "gross_expectancy_R": -0.201,
+        "net_expectancy_R": -0.662,
+        "cost_per_trade_R": 0.46,
+        "total_net_R": -65.51,
+        "profit_factor": 0.32,
+        "max_drawdown_R": 63.91,
+        "longest_losing_streak": 8,
+        "t_stat": -5.52,
+        "ci_level": 0.9995,
+        "ci_low": -1.008,
+        "ci_high": -0.228
+      },
+      "validation": {
+        "trades": 38,
+        "win_rate": 0.158,
+        "avg_win_R": 1.069,
+        "avg_loss_R": -1.546,
+        "gross_expectancy_R": -0.477,
+        "net_expectancy_R": -1.133,
+        "cost_per_trade_R": 0.656,
+        "total_net_R": -43.05,
+        "profit_factor": 0.13,
+        "max_drawdown_R": 43.36,
+        "longest_losing_streak": 13,
+        "t_stat": -6.71,
+        "ci_level": 0.9995,
+        "ci_low": -1.599,
+        "ci_high": -0.495
+      },
+      "out_of_sample_reported_once": {
+        "trades": 34,
+        "win_rate": 0.324,
+        "avg_win_R": 0.983,
+        "avg_loss_R": -1.559,
+        "gross_expectancy_R": -0.04,
+        "net_expectancy_R": -0.737,
+        "cost_per_trade_R": 0.697,
+        "total_net_R": -25.05,
+        "profit_factor": 0.3,
+        "max_drawdown_R": 23.2,
+        "longest_losing_streak": 8,
+        "t_stat": -3.29,
+        "ci_level": 0.9995,
+        "ci_low": -1.424,
+        "ci_high": 0.002
+      },
+      "walk_forward_folds": [
+        {
+          "test": "2024-12-19..2025-01-17",
+          "trades": 6,
+          "net_expectancy_R": -0.691
+        },
+        {
+          "test": "2025-01-18..2025-02-16",
+          "trades": 8,
+          "net_expectancy_R": -0.043
+        },
+        {
+          "test": "2025-02-17..2025-03-18",
+          "trades": 5,
+          "net_expectancy_R": -1.242
+        },
+        {
+          "test": "2025-03-19..2025-04-17",
+          "trades": 7,
+          "net_expectancy_R": -0.664
+        },
+        {
+          "test": "2025-04-18..2025-05-17",
+          "trades": 8,
+          "net_expectancy_R": -0.425
+        },
+        {
+          "test": "2025-05-18..2025-06-16",
+          "trades": 6,
+          "net_expectancy_R": -1.185
+        },
+        {
+          "test": "2025-06-17..2025-07-16",
+          "trades": 10,
+          "net_expectancy_R": -1.056
+        },
+        {
+          "test": "2025-07-17..2025-08-15",
+          "trades": 16,
+          "net_expectancy_R": -0.774
+        },
+        {
+          "test": "2025-08-16..2025-09-14",
+          "trades": 11,
+          "net_expectancy_R": -0.558
+        },
+        {
+          "test": "2025-09-15..2025-10-14",
+          "trades": 4,
+          "net_expectancy_R": -1.01
+        },
+        {
+          "test": "2025-10-15..2025-11-13",
+          "trades": 9,
+          "net_expectancy_R": -0.863
+        },
+        {
+          "test": "2025-11-14..2025-12-13",
+          "trades": 4,
+          "net_expectancy_R": -1.473
+        },
+        {
+          "test": "2025-12-14..2026-01-12",
+          "trades": 8,
+          "net_expectancy_R": -1.344
+        },
+        {
+          "test": "2026-01-13..2026-02-11",
+          "trades": 1,
+          "net_expectancy_R": -1.442
+        },
+        {
+          "test": "2026-02-12..2026-03-13",
+          "trades": 6,
+          "net_expectancy_R": -0.562
+        },
+        {
+          "test": "2026-03-14..2026-04-12",
+          "trades": 9,
+          "net_expectancy_R": -1.346
+        },
+        {
+          "test": "2026-04-13..2026-05-12",
+          "trades": 7,
+          "net_expectancy_R": -1.707
+        },
+        {
+          "test": "2026-05-13..2026-06-11",
+          "trades": 2,
+          "net_expectancy_R": -1.599
+        },
+        {
+          "test": "2026-06-12..2026-07-11",
+          "trades": 13,
+          "net_expectancy_R": -0.425
+        },
+        {
+          "test": "2026-07-12..2026-08-10",
+          "trades": 7,
+          "net_expectancy_R": -0.292
+        },
+        {
+          "test": "2026-08-11..2026-09-09",
+          "trades": 2,
+          "net_expectancy_R": -1.758
+        },
+        {
+          "test": "2026-09-10..2026-10-09",
+          "trades": 3,
+          "net_expectancy_R": 0.299
+        },
+        {
+          "test": "2026-10-10..2026-10-24",
+          "trades": 2,
+          "net_expectancy_R": -1.452
+        }
+      ],
+      "folds_positive_fraction": 0.043478260869565216,
+      "by_regime_descriptive": {
+        "range": {
+          "trades": 84,
+          "win_rate": 0.274,
+          "net_expectancy_R": -0.726,
+          "total_net_R": -60.95
+        },
+        "transition": {
+          "trades": 38,
+          "win_rate": 0.289,
+          "net_expectancy_R": -0.867,
+          "total_net_R": -32.93
+        },
+        "trend": {
+          "trades": 49,
+          "win_rate": 0.245,
+          "net_expectancy_R": -0.811,
+          "total_net_R": -39.73
+        }
+      },
+      "by_time_block_descriptive": {
+        "00-04h UTC": {
+          "trades": 27,
+          "win_rate": 0.185,
+          "net_expectancy_R": -1.078,
+          "total_net_R": -29.12
+        },
+        "04-08h UTC": {
+          "trades": 26,
+          "win_rate": 0.346,
+          "net_expectancy_R": -0.691,
+          "total_net_R": -17.96
+        },
+        "08-12h UTC": {
+          "trades": 20,
+          "win_rate": 0.15,
+          "net_expectancy_R": -1.152,
+          "total_net_R": -23.05
+        },
+        "12-16h UTC": {
+          "trades": 47,
+          "win_rate": 0.298,
+          "net_expectancy_R": -0.694,
+          "total_net_R": -32.64
+        },
+        "16-20h UTC": {
+          "trades": 20,
+          "win_rate": 0.25,
+          "net_expectancy_R": -0.717,
+          "total_net_R": -14.35
+        },
+        "20-24h UTC": {
+          "trades": 31,
+          "win_rate": 0.323,
+          "net_expectancy_R": -0.532,
+          "total_net_R": -16.5
+        }
+      },
+      "cost_sensitivity_out_of_sample": {
+        "rows": [
+          {
+            "fee_pct": 0.0,
+            "net_expectancy_R": -0.256,
+            "win_rate": 0.353,
+            "total_net_R": -8.7
+          },
+          {
+            "fee_pct": 0.02,
+            "net_expectancy_R": -0.353,
+            "win_rate": 0.353,
+            "total_net_R": -12.0
+          },
+          {
+            "fee_pct": 0.05,
+            "net_expectancy_R": -0.497,
+            "win_rate": 0.353,
+            "total_net_R": -16.9
+          },
+          {
+            "fee_pct": 0.1,
+            "net_expectancy_R": -0.737,
+            "win_rate": 0.324,
+            "total_net_R": -25.1
+          },
+          {
+            "fee_pct": 0.2,
+            "net_expectancy_R": -1.217,
+            "win_rate": 0.206,
+            "total_net_R": -41.4
+          },
+          {
+            "fee_pct": 0.4,
+            "net_expectancy_R": -2.178,
+            "win_rate": 0.088,
+            "total_net_R": -74.1
+          }
+        ],
+        "breakeven_fee_pct": -0.053,
+        "note": "Fee per side as % of trade value. If the break-even fee is below your real fee, the average trade loses money."
+      },
+      "cost_sensitivity_all_sample": {
+        "rows": [
+          {
+            "fee_pct": 0.0,
+            "net_expectancy_R": -0.404,
+            "win_rate": 0.275,
+            "total_net_R": -69.0
+          },
+          {
+            "fee_pct": 0.02,
+            "net_expectancy_R": -0.479,
+            "win_rate": 0.275,
+            "total_net_R": -82.0
+          },
+          {
+            "fee_pct": 0.05,
+            "net_expectancy_R": -0.593,
+            "win_rate": 0.275,
+            "total_net_R": -101.3
+          },
+          {
+            "fee_pct": 0.1,
+            "net_expectancy_R": -0.781,
+            "win_rate": 0.269,
+            "total_net_R": -133.6
+          },
+          {
+            "fee_pct": 0.2,
+            "net_expectancy_R": -1.159,
+            "win_rate": 0.216,
+            "total_net_R": -198.2
+          },
+          {
+            "fee_pct": 0.4,
+            "net_expectancy_R": -1.914,
+            "win_rate": 0.129,
+            "total_net_R": -327.3
+          }
+        ],
+        "breakeven_fee_pct": -0.107,
+        "note": "Fee per side as % of trade value. If the break-even fee is below your real fee, the average trade loses money."
+      },
+      "top_day_share_of_total_R": null,
+      "verdict": "INSUFFICIENT_SAMPLE",
+      "verdict_reason": "only 34 out-of-sample trades; at least 100 are required before any claim"
+    },
+    "oversold_bounce": {
+      "label": "oversold_bounce@1.0#612af972",
+      "spec": {
+        "name": "oversold_bounce",
+        "version": "1.0",
+        "hypothesis": "A sudden flush far below the normal range snaps back once price turns up (forced sellers are done).",
+        "why_crypto": "Leveraged liquidations create fast wicks well outside the normal range that often retrace within hours.",
+        "trigger": "A bar pierced the lower 2.5-sigma band with RSI under 30 in the last 3 bars, then a close above the prior high and above its own open. Not taken in a 4-hour downtrend.",
+        "stop_logic": "1.5 x ATR below entry.",
+        "targets": "Half at 1R, half at 2R (mean reversion takes quicker profits).",
+        "holding": "15 minutes to 4 hours"
+      },
+      "stop_atr": 1.5,
+      "t1_r": 1.0,
+      "t2_r": 2.0,
+      "blended_rr": 1.5,
+      "all_sample_in_sample_reference": {
+        "trades": 109,
+        "win_rate": 0.385,
+        "avg_win_R": 0.749,
+        "avg_loss_R": -1.249,
+        "gross_expectancy_R": -0.084,
+        "net_expectancy_R": -0.479,
+        "cost_per_trade_R": 0.396,
+        "total_net_R": -52.26,
+        "profit_factor": 0.38,
+        "max_drawdown_R": 51.25,
+        "longest_losing_streak": 11,
+        "t_stat": -4.73,
+        "ci_level": 0.9995,
+        "ci_low": -0.812,
+        "ci_high": -0.131
+      },
+      "train": {
+        "trades": 64,
+        "win_rate": 0.344,
+        "avg_win_R": 0.753,
+        "avg_loss_R": -1.192,
+        "gross_expectancy_R": -0.189,
+        "net_expectancy_R": -0.523,
+        "cost_per_trade_R": 0.334,
+        "total_net_R": -33.47,
+        "profit_factor": 0.33,
+        "max_drawdown_R": 32.38,
+        "longest_losing_streak": 5,
+        "t_stat": -4.13,
+        "ci_level": 0.9995,
+        "ci_low": -0.914,
+        "ci_high": -0.115
+      },
+      "validation": {
+        "trades": 30,
+        "win_rate": 0.367,
+        "avg_win_R": 0.735,
+        "avg_loss_R": -1.336,
+        "gross_expectancy_R": -0.104,
+        "net_expectancy_R": -0.577,
+        "cost_per_trade_R": 0.472,
+        "total_net_R": -17.3,
+        "profit_factor": 0.32,
+        "max_drawdown_R": 19.37,
+        "longest_losing_streak": 11,
+        "t_stat": -2.89,
+        "ci_level": 0.9995,
+        "ci_low": -1.141,
+        "ci_high": 0.047
+      },
+      "out_of_sample_reported_once": {
+        "trades": 15,
+        "win_rate": 0.6,
+        "avg_win_R": 0.755,
+        "avg_loss_R": -1.38,
+        "gross_expectancy_R": 0.406,
+        "net_expectancy_R": -0.099,
+        "cost_per_trade_R": 0.505,
+        "total_net_R": -1.48,
+        "profit_factor": 0.82,
+        "max_drawdown_R": 3.27,
+        "longest_losing_streak": 2,
+        "t_stat": -0.33,
+        "ci_level": 0.9995,
+        "ci_low": -1.153,
+        "ci_high": 0.799
+      },
+      "walk_forward_folds": [
+        {
+          "test": "2024-12-19..2025-01-17",
+          "trades": 4,
+          "net_expectancy_R": -0.706
+        },
+        {
+          "test": "2025-01-18..2025-02-16",
+          "trades": 5,
+          "net_expectancy_R": -0.343
+        },
+        {
+          "test": "2025-02-17..2025-03-18",
+          "trades": 3,
+          "net_expectancy_R": -1.252
+        },
+        {
+          "test": "2025-03-19..2025-04-17",
+          "trades": 6,
+          "net_expectancy_R": -0.053
+        },
+        {
+          "test": "2025-04-18..2025-05-17",
+          "trades": 7,
+          "net_expectancy_R": -0.191
+        },
+        {
+          "test": "2025-05-18..2025-06-16",
+          "trades": 7,
+          "net_expectancy_R": -0.635
+        },
+        {
+          "test": "2025-06-17..2025-07-16",
+          "trades": 6,
+          "net_expectancy_R": -0.561
+        },
+        {
+          "test": "2025-07-17..2025-08-15",
+          "trades": 2,
+          "net_expectancy_R": -1.16
+        },
+        {
+          "test": "2025-08-16..2025-09-14",
+          "trades": 2,
+          "net_expectancy_R": -0.526
+        },
+        {
+          "test": "2025-09-15..2025-10-14",
+          "trades": 6,
+          "net_expectancy_R": -0.773
+        },
+        {
+          "test": "2025-10-15..2025-11-13",
+          "trades": 6,
+          "net_expectancy_R": -0.076
+        },
+        {
+          "test": "2025-11-14..2025-12-13",
+          "trades": 7,
+          "net_expectancy_R": -0.426
+        },
+        {
+          "test": "2025-12-14..2026-01-12",
+          "trades": 3,
+          "net_expectancy_R": 0.147
+        },
+        {
+          "test": "2026-01-13..2026-02-11",
+          "trades": 3,
+          "net_expectancy_R": -0.217
+        },
+        {
+          "test": "2026-02-12..2026-03-13",
+          "trades": 3,
+          "net_expectancy_R": 0.07
+        },
+        {
+          "test": "2026-03-14..2026-04-12",
+          "trades": 10,
+          "net_expectancy_R": -1.509
+        },
+        {
+          "test": "2026-04-13..2026-05-12",
+          "trades": 6,
+          "net_expectancy_R": -0.023
+        },
+        {
+          "test": "2026-05-13..2026-06-11",
+          "trades": 2,
+          "net_expectancy_R": -0.231
+        },
+        {
+          "test": "2026-06-12..2026-07-11",
+          "trades": 2,
+          "net_expectancy_R": 0.654
+        },
+        {
+          "test": "2026-07-12..2026-08-10",
+          "trades": 3,
+          "net_expectancy_R": -0.657
+        },
+        {
+          "test": "2026-08-11..2026-09-09",
+          "trades": 0,
+          "net_expectancy_R": null
+        },
+        {
+          "test": "2026-09-10..2026-10-09",
+          "trades": 2,
+          "net_expectancy_R": -0.112
+        },
+        {
+          "test": "2026-10-10..2026-10-24",
+          "trades": 0,
+          "net_expectancy_R": null
+        }
+      ],
+      "folds_positive_fraction": 0.14285714285714285,
+      "by_regime_descriptive": {
+        "range": {
+          "trades": 2,
+          "win_rate": 0.0,
+          "net_expectancy_R": -0.74,
+          "total_net_R": -1.48
+        },
+        "transition": {
+          "trades": 15,
+          "win_rate": 0.333,
+          "net_expectancy_R": -0.458,
+          "total_net_R": -6.87
+        },
+        "trend": {
+          "trades": 92,
+          "win_rate": 0.402,
+          "net_expectancy_R": -0.477,
+          "total_net_R": -43.9
+        }
+      },
+      "by_time_block_descriptive": {
+        "00-04h UTC": {
+          "trades": 17,
+          "win_rate": 0.412,
+          "net_expectancy_R": -0.477,
+          "total_net_R": -8.1
+        },
+        "04-08h UTC": {
+          "trades": 15,
+          "win_rate": 0.333,
+          "net_expectancy_R": -0.587,
+          "total_net_R": -8.8
+        },
+        "08-12h UTC": {
+          "trades": 14,
+          "win_rate": 0.143,
+          "net_expectancy_R": -1.063,
+          "total_net_R": -14.89
+        },
+        "12-16h UTC": {
+          "trades": 34,
+          "win_rate": 0.353,
+          "net_expectancy_R": -0.544,
+          "total_net_R": -18.5
+        },
+        "16-20h UTC": {
+          "trades": 12,
+          "win_rate": 0.583,
+          "net_expectancy_R": -0.137,
+          "total_net_R": -1.65
+        },
+        "20-24h UTC": {
+          "trades": 17,
+          "win_rate": 0.529,
+          "net_expectancy_R": -0.019,
+          "total_net_R": -0.32
+        }
+      },
+      "cost_sensitivity_out_of_sample": {
+        "rows": [
+          {
+            "fee_pct": 0.0,
+            "net_expectancy_R": 0.261,
+            "win_rate": 0.6,
+            "total_net_R": 3.9
+          },
+          {
+            "fee_pct": 0.02,
+            "net_expectancy_R": 0.189,
+            "win_rate": 0.6,
+            "total_net_R": 2.8
+          },
+          {
+            "fee_pct": 0.05,
+            "net_expectancy_R": 0.081,
+            "win_rate": 0.6,
+            "total_net_R": 1.2
+          },
+          {
+            "fee_pct": 0.1,
+            "net_expectancy_R": -0.099,
+            "win_rate": 0.6,
+            "total_net_R": -1.5
+          },
+          {
+            "fee_pct": 0.2,
+            "net_expectancy_R": -0.458,
+            "win_rate": 0.4,
+            "total_net_R": -6.9
+          },
+          {
+            "fee_pct": 0.4,
+            "net_expectancy_R": -1.177,
+            "win_rate": 0.267,
+            "total_net_R": -17.7
+          }
+        ],
+        "breakeven_fee_pct": 0.072,
+        "note": "Fee per side as % of trade value. If the break-even fee is below your real fee, the average trade loses money."
+      },
+      "cost_sensitivity_all_sample": {
+        "rows": [
+          {
+            "fee_pct": 0.0,
+            "net_expectancy_R": -0.206,
+            "win_rate": 0.404,
+            "total_net_R": -22.4
+          },
+          {
+            "fee_pct": 0.02,
+            "net_expectancy_R": -0.261,
+            "win_rate": 0.394,
+            "total_net_R": -28.4
+          },
+          {
+            "fee_pct": 0.05,
+            "net_expectancy_R": -0.343,
+            "win_rate": 0.394,
+            "total_net_R": -37.3
+          },
+          {
+            "fee_pct": 0.1,
+            "net_expectancy_R": -0.479,
+            "win_rate": 0.385,
+            "total_net_R": -52.3
+          },
+          {
+            "fee_pct": 0.2,
+            "net_expectancy_R": -0.753,
+            "win_rate": 0.321,
+            "total_net_R": -82.1
+          },
+          {
+            "fee_pct": 0.4,
+            "net_expectancy_R": -1.3,
+            "win_rate": 0.202,
+            "total_net_R": -141.7
+          }
+        ],
+        "breakeven_fee_pct": -0.075,
+        "note": "Fee per side as % of trade value. If the break-even fee is below your real fee, the average trade loses money."
+      },
+      "top_day_share_of_total_R": null,
+      "verdict": "INSUFFICIENT_SAMPLE",
+      "verdict_reason": "only 15 out-of-sample trades; at least 100 are required before any claim"
+    },
+    "range_bounce": {
+      "label": "range_bounce@1.0#6ed88bd5",
+      "spec": {
+        "name": "range_bounce",
+        "version": "1.0",
+        "hypothesis": "In a sideways market, a dip under the lower band that closes back inside tends to return to the middle.",
+        "why_crypto": "Crypto spends long stretches in ranges between big moves; weekends in particular can be quiet and range-bound.",
+        "trigger": "1-hour ADX under 20, a dip under the lower Bollinger band, a close back above it, RSI under 40, and a green candle.",
+        "stop_logic": "1.2 x ATR below entry.",
+        "targets": "Half at 1R, half at 2R.",
+        "holding": "15 minutes to 3 hours"
+      },
+      "stop_atr": 1.2,
+      "t1_r": 1.0,
+      "t2_r": 2.0,
+      "blended_rr": 1.5,
+      "all_sample_in_sample_reference": {
+        "trades": 333,
+        "win_rate": 0.357,
+        "avg_win_R": 0.639,
+        "avg_loss_R": -1.329,
+        "gross_expectancy_R": -0.047,
+        "net_expectancy_R": -0.626,
+        "cost_per_trade_R": 0.578,
+        "total_net_R": -208.38,
+        "profit_factor": 0.27,
+        "max_drawdown_R": 208.71,
+        "longest_losing_streak": 10,
+        "t_stat": -10.81,
+        "ci_level": 0.9995,
+        "ci_low": -0.792,
+        "ci_high": -0.437
+      },
+      "train": {
+        "trades": 164,
+        "win_rate": 0.384,
+        "avg_win_R": 0.588,
+        "avg_loss_R": -1.302,
+        "gross_expectancy_R": -0.089,
+        "net_expectancy_R": -0.576,
+        "cost_per_trade_R": 0.487,
+        "total_net_R": -94.46,
+        "profit_factor": 0.28,
+        "max_drawdown_R": 94.79,
+        "longest_losing_streak": 9,
+        "t_stat": -7.25,
+        "ci_level": 0.9995,
+        "ci_low": -0.86,
+        "ci_high": -0.307
+      },
+      "validation": {
+        "trades": 78,
+        "win_rate": 0.397,
+        "avg_win_R": 0.696,
+        "avg_loss_R": -1.311,
+        "gross_expectancy_R": 0.075,
+        "net_expectancy_R": -0.514,
+        "cost_per_trade_R": 0.589,
+        "total_net_R": -40.06,
+        "profit_factor": 0.35,
+        "max_drawdown_R": 43.4,
+        "longest_losing_streak": 6,
+        "t_stat": -4.16,
+        "ci_level": 0.9995,
+        "ci_low": -0.859,
+        "ci_high": -0.135
+      },
+      "out_of_sample_reported_once": {
+        "trades": 91,
+        "win_rate": 0.275,
+        "avg_win_R": 0.698,
+        "avg_loss_R": -1.383,
+        "gross_expectancy_R": -0.077,
+        "net_expectancy_R": -0.812,
+        "cost_per_trade_R": 0.735,
+        "total_net_R": -73.86,
+        "profit_factor": 0.19,
+        "max_drawdown_R": 71.76,
+        "longest_losing_streak": 10,
+        "t_stat": -7.15,
+        "ci_level": 0.9995,
+        "ci_low": -1.168,
+        "ci_high": -0.473
+      },
+      "walk_forward_folds": [
+        {
+          "test": "2024-12-19..2025-01-17",
+          "trades": 14,
+          "net_expectancy_R": -0.859
+        },
+        {
+          "test": "2025-01-18..2025-02-16",
+          "trades": 10,
+          "net_expectancy_R": -0.283
+        },
+        {
+          "test": "2025-02-17..2025-03-18",
+          "trades": 13,
+          "net_expectancy_R": -0.445
+        },
+        {
+          "test": "2025-03-19..2025-04-17",
+          "trades": 13,
+          "net_expectancy_R": -0.185
+        },
+        {
+          "test": "2025-04-18..2025-05-17",
+          "trades": 23,
+          "net_expectancy_R": -0.531
+        },
+        {
+          "test": "2025-05-18..2025-06-16",
+          "trades": 15,
+          "net_expectancy_R": -0.72
+        },
+        {
+          "test": "2025-06-17..2025-07-16",
+          "trades": 8,
+          "net_expectancy_R": -0.838
+        },
+        {
+          "test": "2025-07-17..2025-08-15",
+          "trades": 10,
+          "net_expectancy_R": -0.686
+        },
+        {
+          "test": "2025-08-16..2025-09-14",
+          "trades": 17,
+          "net_expectancy_R": -0.77
+        },
+        {
+          "test": "2025-09-15..2025-10-14",
+          "trades": 20,
+          "net_expectancy_R": -0.519
+        },
+        {
+          "test": "2025-10-15..2025-11-13",
+          "trades": 9,
+          "net_expectancy_R": -0.52
+        },
+        {
+          "test": "2025-11-14..2025-12-13",
+          "trades": 13,
+          "net_expectancy_R": -0.775
+        },
+        {
+          "test": "2025-12-14..2026-01-12",
+          "trades": 15,
+          "net_expectancy_R": -0.405
+        },
+        {
+          "test": "2026-01-13..2026-02-11",
+          "trades": 14,
+          "net_expectancy_R": -0.357
+        },
+        {
+          "test": "2026-02-12..2026-03-13",
+          "trades": 14,
+          "net_expectancy_R": -0.667
+        },
+        {
+          "test": "2026-03-14..2026-04-12",
+          "trades": 10,
+          "net_expectancy_R": -0.722
+        },
+        {
+          "test": "2026-04-13..2026-05-12",
+          "trades": 16,
+          "net_expectancy_R": -0.79
+        },
+        {
+          "test": "2026-05-13..2026-06-11",
+          "trades": 19,
+          "net_expectancy_R": -0.558
+        },
+        {
+          "test": "2026-06-12..2026-07-11",
+          "trades": 14,
+          "net_expectancy_R": -0.866
+        },
+        {
+          "test": "2026-07-12..2026-08-10",
+          "trades": 13,
+          "net_expectancy_R": -0.561
+        },
+        {
+          "test": "2026-08-11..2026-09-09",
+          "trades": 20,
+          "net_expectancy_R": -1.045
+        },
+        {
+          "test": "2026-09-10..2026-10-09",
+          "trades": 11,
+          "net_expectancy_R": -0.636
+        },
+        {
+          "test": "2026-10-10..2026-10-24",
+          "trades": 4,
+          "net_expectancy_R": -0.909
+        }
+      ],
+      "folds_positive_fraction": 0.0,
+      "by_regime_descriptive": {
+        "range": {
+          "trades": 48,
+          "win_rate": 0.375,
+          "net_expectancy_R": -0.542,
+          "total_net_R": -26.02
+        },
+        "transition": {
+          "trades": 87,
+          "win_rate": 0.299,
+          "net_expectancy_R": -0.748,
+          "total_net_R": -65.08
+        },
+        "trend": {
+          "trades": 198,
+          "win_rate": 0.379,
+          "net_expectancy_R": -0.592,
+          "total_net_R": -117.28
+        }
+      },
+      "by_time_block_descriptive": {
+        "00-04h UTC": {
+          "trades": 50,
+          "win_rate": 0.3,
+          "net_expectancy_R": -0.782,
+          "total_net_R": -39.09
+        },
+        "04-08h UTC": {
+          "trades": 51,
+          "win_rate": 0.373,
+          "net_expectancy_R": -0.651,
+          "total_net_R": -33.22
+        },
+        "08-12h UTC": {
+          "trades": 64,
+          "win_rate": 0.297,
+          "net_expectancy_R": -0.775,
+          "total_net_R": -49.62
+        },
+        "12-16h UTC": {
+          "trades": 83,
+          "win_rate": 0.361,
+          "net_expectancy_R": -0.551,
+          "total_net_R": -45.72
+        },
+        "16-20h UTC": {
+          "trades": 49,
+          "win_rate": 0.469,
+          "net_expectancy_R": -0.344,
+          "total_net_R": -16.85
+        },
+        "20-24h UTC": {
+          "trades": 36,
+          "win_rate": 0.361,
+          "net_expectancy_R": -0.663,
+          "total_net_R": -23.88
+        }
+      },
+      "cost_sensitivity_out_of_sample": {
+        "rows": [
+          {
+            "fee_pct": 0.0,
+            "net_expectancy_R": -0.301,
+            "win_rate": 0.396,
+            "total_net_R": -27.4
+          },
+          {
+            "fee_pct": 0.02,
+            "net_expectancy_R": -0.403,
+            "win_rate": 0.396,
+            "total_net_R": -36.7
+          },
+          {
+            "fee_pct": 0.05,
+            "net_expectancy_R": -0.556,
+            "win_rate": 0.363,
+            "total_net_R": -50.6
+          },
+          {
+            "fee_pct": 0.1,
+            "net_expectancy_R": -0.812,
+            "win_rate": 0.275,
+            "total_net_R": -73.9
+          },
+          {
+            "fee_pct": 0.2,
+            "net_expectancy_R": -1.322,
+            "win_rate": 0.187,
+            "total_net_R": -120.3
+          },
+          {
+            "fee_pct": 0.4,
+            "net_expectancy_R": -2.343,
+            "win_rate": 0.066,
+            "total_net_R": -213.2
+          }
+        ],
+        "breakeven_fee_pct": -0.059,
+        "note": "Fee per side as % of trade value. If the break-even fee is below your real fee, the average trade loses money."
+      },
+      "cost_sensitivity_all_sample": {
+        "rows": [
+          {
+            "fee_pct": 0.0,
+            "net_expectancy_R": -0.223,
+            "win_rate": 0.429,
+            "total_net_R": -74.3
+          },
+          {
+            "fee_pct": 0.02,
+            "net_expectancy_R": -0.304,
+            "win_rate": 0.429,
+            "total_net_R": -101.1
+          },
+          {
+            "fee_pct": 0.05,
+            "net_expectancy_R": -0.424,
+            "win_rate": 0.417,
+            "total_net_R": -141.3
+          },
+          {
+            "fee_pct": 0.1,
+            "net_expectancy_R": -0.626,
+            "win_rate": 0.357,
+            "total_net_R": -208.4
+          },
+          {
+            "fee_pct": 0.2,
+            "net_expectancy_R": -1.028,
+            "win_rate": 0.24,
+            "total_net_R": -342.5
+          },
+          {
+            "fee_pct": 0.4,
+            "net_expectancy_R": -1.834,
+            "win_rate": 0.096,
+            "total_net_R": -610.6
+          }
+        ],
+        "breakeven_fee_pct": -0.055,
+        "note": "Fee per side as % of trade value. If the break-even fee is below your real fee, the average trade loses money."
+      },
+      "top_day_share_of_total_R": null,
+      "verdict": "INSUFFICIENT_SAMPLE",
+      "verdict_reason": "only 91 out-of-sample trades; at least 100 are required before any claim"
+    },
+    "btc_lead": {
+      "label": "btc_lead@1.0#314a476d",
+      "spec": {
+        "name": "btc_lead",
+        "version": "1.0",
+        "hypothesis": "When Bitcoin makes a big move up and the coin has barely moved yet, the coin tends to catch up.",
+        "why_crypto": "Bitcoin leads the rest of the crypto market; smaller coins often follow with a delay.",
+        "trigger": "Bitcoin's last-hour gain is at least 1.5x its typical hour while this coin gained under 40% of that, on a green candle.",
+        "stop_logic": "1.5 x ATR below entry.",
+        "targets": "Half at 1R, half at 2R.",
+        "holding": "15 minutes to 2 hours"
+      },
+      "stop_atr": 1.5,
+      "t1_r": 1.0,
+      "t2_r": 2.0,
+      "blended_rr": 1.5,
+      "all_sample_in_sample_reference": {
+        "trades": 49,
+        "win_rate": 0.388,
+        "avg_win_R": 0.704,
+        "avg_loss_R": -1.178,
+        "gross_expectancy_R": 0.07,
+        "net_expectancy_R": -0.448,
+        "cost_per_trade_R": 0.518,
+        "total_net_R": -21.97,
+        "profit_factor": 0.38,
+        "max_drawdown_R": 21.33,
+        "longest_losing_streak": 5,
+        "t_stat": -3.03,
+        "ci_level": 0.9995,
+        "ci_low": -0.956,
+        "ci_high": 0.081
+      },
+      "train": {
+        "trades": 27,
+        "win_rate": 0.37,
+        "avg_win_R": 0.806,
+        "avg_loss_R": -1.066,
+        "gross_expectancy_R": 0.028,
+        "net_expectancy_R": -0.373,
+        "cost_per_trade_R": 0.401,
+        "total_net_R": -10.06,
+        "profit_factor": 0.44,
+        "max_drawdown_R": 10.03,
+        "longest_losing_streak": 5,
+        "t_stat": -1.89,
+        "ci_level": 0.9995,
+        "ci_low": -0.964,
+        "ci_high": 0.316
+      },
+      "validation": {
+        "trades": 8,
+        "win_rate": 0.375,
+        "avg_win_R": 0.498,
+        "avg_loss_R": -1.224,
+        "gross_expectancy_R": 0.031,
+        "net_expectancy_R": -0.578,
+        "cost_per_trade_R": 0.609,
+        "total_net_R": -4.63,
+        "profit_factor": 0.24,
+        "max_drawdown_R": 4.83,
+        "longest_losing_streak": 3,
+        "t_stat": -1.64,
+        "ci_level": 0.9995,
+        "ci_low": -1.496,
+        "ci_high": 0.622
+      },
+      "out_of_sample_reported_once": {
+        "trades": 14,
+        "win_rate": 0.429,
+        "avg_win_R": 0.637,
+        "avg_loss_R": -1.388,
+        "gross_expectancy_R": 0.172,
+        "net_expectancy_R": -0.52,
+        "cost_per_trade_R": 0.692,
+        "total_net_R": -7.28,
+        "profit_factor": 0.34,
+        "max_drawdown_R": 8.03,
+        "longest_losing_streak": 4,
+        "t_stat": -1.7,
+        "ci_level": 0.9995,
+        "ci_low": -1.45,
+        "ci_high": 0.371
+      },
+      "walk_forward_folds": [
+        {
+          "test": "2024-12-19..2025-01-17",
+          "trades": 2,
+          "net_expectancy_R": 0.825
+        },
+        {
+          "test": "2025-01-18..2025-02-16",
+          "trades": 2,
+          "net_expectancy_R": -0.915
+        },
+        {
+          "test": "2025-02-17..2025-03-18",
+          "trades": 2,
+          "net_expectancy_R": -0.748
+        },
+        {
+          "test": "2025-03-19..2025-04-17",
+          "trades": 3,
+          "net_expectancy_R": -0.137
+        },
+        {
+          "test": "2025-04-18..2025-05-17",
+          "trades": 1,
+          "net_expectancy_R": 1.126
+        },
+        {
+          "test": "2025-05-18..2025-06-16",
+          "trades": 3,
+          "net_expectancy_R": -0.051
+        },
+        {
+          "test": "2025-06-17..2025-07-16",
+          "trades": 3,
+          "net_expectancy_R": -1.132
+        },
+        {
+          "test": "2025-07-17..2025-08-15",
+          "trades": 2,
+          "net_expectancy_R": 0.03
+        },
+        {
+          "test": "2025-08-16..2025-09-14",
+          "trades": 1,
+          "net_expectancy_R": -1.535
+        },
+        {
+          "test": "2025-09-15..2025-10-14",
+          "trades": 1,
+          "net_expectancy_R": 0.6
+        },
+        {
+          "test": "2025-10-15..2025-11-13",
+          "trades": 0,
+          "net_expectancy_R": null
+        },
+        {
+          "test": "2025-11-14..2025-12-13",
+          "trades": 0,
+          "net_expectancy_R": null
+        },
+        {
+          "test": "2025-12-14..2026-01-12",
+          "trades": 2,
+          "net_expectancy_R": -0.683
+        },
+        {
+          "test": "2026-01-13..2026-02-11",
+          "trades": 1,
+          "net_expectancy_R": 0.258
+        },
+        {
+          "test": "2026-02-12..2026-03-13",
+          "trades": 0,
+          "net_expectancy_R": null
+        },
+        {
+          "test": "2026-03-14..2026-04-12",
+          "trades": 3,
+          "net_expectancy_R": -0.437
+        },
+        {
+          "test": "2026-04-13..2026-05-12",
+          "trades": 4,
+          "net_expectancy_R": -0.885
+        },
+        {
+          "test": "2026-05-13..2026-06-11",
+          "trades": 0,
+          "net_expectancy_R": null
+        },
+        {
+          "test": "2026-06-12..2026-07-11",
+          "trades": 1,
+          "net_expectancy_R": 0.052
+        },
+        {
+          "test": "2026-07-12..2026-08-10",
+          "trades": 2,
+          "net_expectancy_R": -1.025
+        },
+        {
+          "test": "2026-08-11..2026-09-09",
+          "trades": 5,
+          "net_expectancy_R": -0.155
+        },
+        {
+          "test": "2026-09-10..2026-10-09",
+          "trades": 4,
+          "net_expectancy_R": -0.794
+        },
+        {
+          "test": "2026-10-10..2026-10-24",
+          "trades": 0,
+          "net_expectancy_R": null
+        }
+      ],
+      "folds_positive_fraction": 0.3333333333333333,
+      "by_regime_descriptive": {
+        "range": {
+          "trades": 11,
+          "win_rate": 0.364,
+          "net_expectancy_R": -0.395,
+          "total_net_R": -4.35
+        },
+        "transition": {
+          "trades": 12,
+          "win_rate": 0.25,
+          "net_expectancy_R": -0.819,
+          "total_net_R": -9.82
+        },
+        "trend": {
+          "trades": 26,
+          "win_rate": 0.462,
+          "net_expectancy_R": -0.3,
+          "total_net_R": -7.8
+        }
+      },
+      "by_time_block_descriptive": {
+        "00-04h UTC": {
+          "trades": 6,
+          "win_rate": 0.333,
+          "net_expectancy_R": -0.259,
+          "total_net_R": -1.55
+        },
+        "04-08h UTC": {
+          "trades": 6,
+          "win_rate": 0.333,
+          "net_expectancy_R": -0.74,
+          "total_net_R": -4.44
+        },
+        "08-12h UTC": {
+          "trades": 10,
+          "win_rate": 0.2,
+          "net_expectancy_R": -0.822,
+          "total_net_R": -8.22
+        },
+        "12-16h UTC": {
+          "trades": 16,
+          "win_rate": 0.438,
+          "net_expectancy_R": -0.311,
+          "total_net_R": -4.97
+        },
+        "16-20h UTC": {
+          "trades": 6,
+          "win_rate": 0.5,
+          "net_expectancy_R": -0.492,
+          "total_net_R": -2.95
+        },
+        "20-24h UTC": {
+          "trades": 5,
+          "win_rate": 0.6,
+          "net_expectancy_R": 0.035,
+          "total_net_R": 0.18
+        }
+      },
+      "cost_sensitivity_out_of_sample": {
+        "rows": [
+          {
+            "fee_pct": 0.0,
+            "net_expectancy_R": -0.029,
+            "win_rate": 0.5,
+            "total_net_R": -0.4
+          },
+          {
+            "fee_pct": 0.02,
+            "net_expectancy_R": -0.127,
+            "win_rate": 0.5,
+            "total_net_R": -1.8
+          },
+          {
+            "fee_pct": 0.05,
+            "net_expectancy_R": -0.275,
+            "win_rate": 0.5,
+            "total_net_R": -3.8
+          },
+          {
+            "fee_pct": 0.1,
+            "net_expectancy_R": -0.52,
+            "win_rate": 0.429,
+            "total_net_R": -7.3
+          },
+          {
+            "fee_pct": 0.2,
+            "net_expectancy_R": -1.011,
+            "win_rate": 0.286,
+            "total_net_R": -14.2
+          },
+          {
+            "fee_pct": 0.4,
+            "net_expectancy_R": -1.993,
+            "win_rate": 0.143,
+            "total_net_R": -27.9
+          }
+        ],
+        "breakeven_fee_pct": -0.006,
+        "note": "Fee per side as % of trade value. If the break-even fee is below your real fee, the average trade loses money."
+      },
+      "cost_sensitivity_all_sample": {
+        "rows": [
+          {
+            "fee_pct": 0.0,
+            "net_expectancy_R": -0.085,
+            "win_rate": 0.429,
+            "total_net_R": -4.1
+          },
+          {
+            "fee_pct": 0.02,
+            "net_expectancy_R": -0.157,
+            "win_rate": 0.429,
+            "total_net_R": -7.7
+          },
+          {
+            "fee_pct": 0.05,
+            "net_expectancy_R": -0.266,
+            "win_rate": 0.429,
+            "total_net_R": -13.1
+          },
+          {
+            "fee_pct": 0.1,
+            "net_expectancy_R": -0.448,
+            "win_rate": 0.388,
+            "total_net_R": -22.0
+          },
+          {
+            "fee_pct": 0.2,
+            "net_expectancy_R": -0.812,
+            "win_rate": 0.306,
+            "total_net_R": -39.8
+          },
+          {
+            "fee_pct": 0.4,
+            "net_expectancy_R": -1.539,
+            "win_rate": 0.122,
+            "total_net_R": -75.4
+          }
+        ],
+        "breakeven_fee_pct": -0.023,
+        "note": "Fee per side as % of trade value. If the break-even fee is below your real fee, the average trade loses money."
+      },
+      "top_day_share_of_total_R": null,
+      "verdict": "INSUFFICIENT_SAMPLE",
+      "verdict_reason": "only 14 out-of-sample trades; at least 100 are required before any claim"
+    },
+    "support_bounce": {
+      "label": "support_bounce@1.0#47b0400e",
+      "spec": {
+        "name": "support_bounce",
+        "version": "1.0",
+        "hypothesis": "In an uptrend (higher highs and higher lows), price that dips back to the last higher low and is rejected tends to resume up.",
+        "why_crypto": "Classic chart support. Crypto trends persist and dips to prior swing lows are widely watched, so reactions there are common.",
+        "trigger": "Uptrend structure on the entry chart and the 1h chart; a candle dips to within a quarter ATR of the last swing low (never more than one ATR below it) and closes back above it in the top part of its range.",
+        "stop_logic": "1.5 x ATR below entry.",
+        "targets": "Half at 1.5R, half at 3R.",
+        "holding": "1 to 6 hours"
+      },
+      "stop_atr": 1.5,
+      "t1_r": 1.5,
+      "t2_r": 3.0,
+      "blended_rr": 2.25,
+      "all_sample_in_sample_reference": {
+        "trades": 273,
+        "win_rate": 0.341,
+        "avg_win_R": 0.998,
+        "avg_loss_R": -1.342,
+        "gross_expectancy_R": -0.064,
+        "net_expectancy_R": -0.544,
+        "cost_per_trade_R": 0.48,
+        "total_net_R": -148.64,
+        "profit_factor": 0.38,
+        "max_drawdown_R": 148.03,
+        "longest_losing_streak": 13,
+        "t_stat": -7.44,
+        "ci_level": 0.9995,
+        "ci_low": -0.799,
+        "ci_high": -0.308
+      },
+      "train": {
+        "trades": 141,
+        "win_rate": 0.291,
+        "avg_win_R": 1.015,
+        "avg_loss_R": -1.293,
+        "gross_expectancy_R": -0.223,
+        "net_expectancy_R": -0.622,
+        "cost_per_trade_R": 0.399,
+        "total_net_R": -87.65,
+        "profit_factor": 0.32,
+        "max_drawdown_R": 87.17,
+        "longest_losing_streak": 13,
+        "t_stat": -6.55,
+        "ci_level": 0.9995,
+        "ci_low": -0.914,
+        "ci_high": -0.301
+      },
+      "validation": {
+        "trades": 72,
+        "win_rate": 0.403,
+        "avg_win_R": 0.846,
+        "avg_loss_R": -1.319,
+        "gross_expectancy_R": 0.065,
+        "net_expectancy_R": -0.447,
+        "cost_per_trade_R": 0.512,
+        "total_net_R": -32.16,
+        "profit_factor": 0.43,
+        "max_drawdown_R": 31.17,
+        "longest_losing_streak": 8,
+        "t_stat": -3.2,
+        "ci_level": 0.9995,
+        "ci_low": -0.858,
+        "ci_high": 0.084
+      },
+      "out_of_sample_reported_once": {
+        "trades": 60,
+        "win_rate": 0.383,
+        "avg_win_R": 1.161,
+        "avg_loss_R": -1.501,
+        "gross_expectancy_R": 0.153,
+        "net_expectancy_R": -0.48,
+        "cost_per_trade_R": 0.633,
+        "total_net_R": -28.83,
+        "profit_factor": 0.48,
+        "max_drawdown_R": 30.71,
+        "longest_losing_streak": 11,
+        "t_stat": -2.63,
+        "ci_level": 0.9995,
+        "ci_low": -1.009,
+        "ci_high": 0.073
+      },
+      "walk_forward_folds": [
+        {
+          "test": "2024-12-19..2025-01-17",
+          "trades": 9,
+          "net_expectancy_R": -1.079
+        },
+        {
+          "test": "2025-01-18..2025-02-16",
+          "trades": 10,
+          "net_expectancy_R": -0.323
+        },
+        {
+          "test": "2025-02-17..2025-03-18",
+          "trades": 9,
+          "net_expectancy_R": -0.523
+        },
+        {
+          "test": "2025-03-19..2025-04-17",
+          "trades": 10,
+          "net_expectancy_R": -0.846
+        },
+        {
+          "test": "2025-04-18..2025-05-17",
+          "trades": 10,
+          "net_expectancy_R": -0.223
+        },
+        {
+          "test": "2025-05-18..2025-06-16",
+          "trades": 16,
+          "net_expectancy_R": -0.844
+        },
+        {
+          "test": "2025-06-17..2025-07-16",
+          "trades": 12,
+          "net_expectancy_R": -0.328
+        },
+        {
+          "test": "2025-07-17..2025-08-15",
+          "trades": 14,
+          "net_expectancy_R": -0.637
+        },
+        {
+          "test": "2025-08-16..2025-09-14",
+          "trades": 15,
+          "net_expectancy_R": -0.598
+        },
+        {
+          "test": "2025-09-15..2025-10-14",
+          "trades": 11,
+          "net_expectancy_R": -0.819
+        },
+        {
+          "test": "2025-10-15..2025-11-13",
+          "trades": 9,
+          "net_expectancy_R": -0.966
+        },
+        {
+          "test": "2025-11-14..2025-12-13",
+          "trades": 14,
+          "net_expectancy_R": -0.531
+        },
+        {
+          "test": "2025-12-14..2026-01-12",
+          "trades": 16,
+          "net_expectancy_R": -0.549
+        },
+        {
+          "test": "2026-01-13..2026-02-11",
+          "trades": 6,
+          "net_expectancy_R": -0.634
+        },
+        {
+          "test": "2026-02-12..2026-03-13",
+          "trades": 15,
+          "net_expectancy_R": 0.08
+        },
+        {
+          "test": "2026-03-14..2026-04-12",
+          "trades": 11,
+          "net_expectancy_R": -0.235
+        },
+        {
+          "test": "2026-04-13..2026-05-12",
+          "trades": 8,
+          "net_expectancy_R": -0.324
+        },
+        {
+          "test": "2026-05-13..2026-06-11",
+          "trades": 8,
+          "net_expectancy_R": -1.626
+        },
+        {
+          "test": "2026-06-12..2026-07-11",
+          "trades": 10,
+          "net_expectancy_R": -0.537
+        },
+        {
+          "test": "2026-07-12..2026-08-10",
+          "trades": 14,
+          "net_expectancy_R": -0.592
+        },
+        {
+          "test": "2026-08-11..2026-09-09",
+          "trades": 10,
+          "net_expectancy_R": -0.214
+        },
+        {
+          "test": "2026-09-10..2026-10-09",
+          "trades": 8,
+          "net_expectancy_R": 0.022
+        },
+        {
+          "test": "2026-10-10..2026-10-24",
+          "trades": 6,
+          "net_expectancy_R": -0.347
+        }
+      ],
+      "folds_positive_fraction": 0.08695652173913043,
+      "by_regime_descriptive": {
+        "range": {
+          "trades": 102,
+          "win_rate": 0.284,
+          "net_expectancy_R": -0.659,
+          "total_net_R": -67.19
+        },
+        "transition": {
+          "trades": 52,
+          "win_rate": 0.269,
+          "net_expectancy_R": -0.724,
+          "total_net_R": -37.64
+        },
+        "trend": {
+          "trades": 119,
+          "win_rate": 0.42,
+          "net_expectancy_R": -0.368,
+          "total_net_R": -43.8
+        }
+      },
+      "by_time_block_descriptive": {
+        "00-04h UTC": {
+          "trades": 48,
+          "win_rate": 0.354,
+          "net_expectancy_R": -0.573,
+          "total_net_R": -27.49
+        },
+        "04-08h UTC": {
+          "trades": 49,
+          "win_rate": 0.49,
+          "net_expectancy_R": -0.249,
+          "total_net_R": -12.18
+        },
+        "08-12h UTC": {
+          "trades": 46,
+          "win_rate": 0.37,
+          "net_expectancy_R": -0.48,
+          "total_net_R": -22.1
+        },
+        "12-16h UTC": {
+          "trades": 51,
+          "win_rate": 0.314,
+          "net_expectancy_R": -0.576,
+          "total_net_R": -29.37
+        },
+        "16-20h UTC": {
+          "trades": 37,
+          "win_rate": 0.216,
+          "net_expectancy_R": -0.772,
+          "total_net_R": -28.57
+        },
+        "20-24h UTC": {
+          "trades": 42,
+          "win_rate": 0.262,
+          "net_expectancy_R": -0.688,
+          "total_net_R": -28.91
+        }
+      },
+      "cost_sensitivity_out_of_sample": {
+        "rows": [
+          {
+            "fee_pct": 0.0,
+            "net_expectancy_R": -0.039,
+            "win_rate": 0.417,
+            "total_net_R": -2.4
+          },
+          {
+            "fee_pct": 0.02,
+            "net_expectancy_R": -0.128,
+            "win_rate": 0.417,
+            "total_net_R": -7.7
+          },
+          {
+            "fee_pct": 0.05,
+            "net_expectancy_R": -0.26,
+            "win_rate": 0.417,
+            "total_net_R": -15.6
+          },
+          {
+            "fee_pct": 0.1,
+            "net_expectancy_R": -0.48,
+            "win_rate": 0.383,
+            "total_net_R": -28.8
+          },
+          {
+            "fee_pct": 0.2,
+            "net_expectancy_R": -0.921,
+            "win_rate": 0.3,
+            "total_net_R": -55.3
+          },
+          {
+            "fee_pct": 0.4,
+            "net_expectancy_R": -1.803,
+            "win_rate": 0.183,
+            "total_net_R": -108.2
+          }
+        ],
+        "breakeven_fee_pct": -0.009,
+        "note": "Fee per side as % of trade value. If the break-even fee is below your real fee, the average trade loses money."
+      },
+      "cost_sensitivity_all_sample": {
+        "rows": [
+          {
+            "fee_pct": 0.0,
+            "net_expectancy_R": -0.211,
+            "win_rate": 0.363,
+            "total_net_R": -57.7
+          },
+          {
+            "fee_pct": 0.02,
+            "net_expectancy_R": -0.278,
+            "win_rate": 0.363,
+            "total_net_R": -75.9
+          },
+          {
+            "fee_pct": 0.05,
+            "net_expectancy_R": -0.378,
+            "win_rate": 0.359,
+            "total_net_R": -103.2
+          },
+          {
+            "fee_pct": 0.1,
+            "net_expectancy_R": -0.544,
+            "win_rate": 0.341,
+            "total_net_R": -148.6
+          },
+          {
+            "fee_pct": 0.2,
+            "net_expectancy_R": -0.877,
+            "win_rate": 0.245,
+            "total_net_R": -239.5
+          },
+          {
+            "fee_pct": 0.4,
+            "net_expectancy_R": -1.543,
+            "win_rate": 0.165,
+            "total_net_R": -421.4
+          }
+        ],
+        "breakeven_fee_pct": -0.064,
+        "note": "Fee per side as % of trade value. If the break-even fee is below your real fee, the average trade loses money."
+      },
+      "top_day_share_of_total_R": null,
+      "verdict": "INSUFFICIENT_SAMPLE",
+      "verdict_reason": "only 60 out-of-sample trades; at least 100 are required before any claim"
+    },
+    "swing_breakout": {
+      "label": "swing_breakout@1.0#c070786d",
+      "spec": {
+        "name": "swing_breakout",
+        "version": "1.0",
+        "hypothesis": "A strong close above the last confirmed swing high, on above-normal volume, in an uptrend, tends to continue.",
+        "why_crypto": "Classic breakout above resistance. Stops resting above swing highs add fuel when they are taken out.",
+        "trigger": "First candle close above the last confirmed swing high, in the top 30% of its range, volume at least 1.3x normal, and the entry-chart structure is not a downtrend.",
+        "stop_logic": "2 x ATR below entry.",
+        "targets": "Half at 1.5R, half at 3R.",
+        "holding": "1 to 8 hours"
+      },
+      "stop_atr": 2.0,
+      "t1_r": 1.5,
+      "t2_r": 3.0,
+      "blended_rr": 2.25,
+      "all_sample_in_sample_reference": {
+        "trades": 314,
+        "win_rate": 0.338,
+        "avg_win_R": 1.093,
+        "avg_loss_R": -1.177,
+        "gross_expectancy_R": -0.087,
+        "net_expectancy_R": -0.41,
+        "cost_per_trade_R": 0.324,
+        "total_net_R": -128.89,
+        "profit_factor": 0.47,
+        "max_drawdown_R": 134.48,
+        "longest_losing_streak": 10,
+        "t_stat": -6.22,
+        "ci_level": 0.9995,
+        "ci_low": -0.6,
+        "ci_high": -0.2
+      },
+      "train": {
+        "trades": 165,
+        "win_rate": 0.358,
+        "avg_win_R": 1.167,
+        "avg_loss_R": -1.142,
+        "gross_expectancy_R": -0.041,
+        "net_expectancy_R": -0.316,
+        "cost_per_trade_R": 0.275,
+        "total_net_R": -52.21,
+        "profit_factor": 0.57,
+        "max_drawdown_R": 57.78,
+        "longest_losing_streak": 10,
+        "t_stat": -3.37,
+        "ci_level": 0.9995,
+        "ci_low": -0.62,
+        "ci_high": 0.017
+      },
+      "validation": {
+        "trades": 69,
+        "win_rate": 0.29,
+        "avg_win_R": 0.931,
+        "avg_loss_R": -1.178,
+        "gross_expectancy_R": -0.208,
+        "net_expectancy_R": -0.567,
+        "cost_per_trade_R": 0.359,
+        "total_net_R": -39.13,
+        "profit_factor": 0.32,
+        "max_drawdown_R": 40.98,
+        "longest_losing_streak": 9,
+        "t_stat": -4.45,
+        "ci_level": 0.9995,
+        "ci_low": -0.94,
+        "ci_high": -0.11
+      },
+      "out_of_sample_reported_once": {
+        "trades": 80,
+        "win_rate": 0.338,
+        "avg_win_R": 1.052,
+        "avg_loss_R": -1.244,
+        "gross_expectancy_R": -0.076,
+        "net_expectancy_R": -0.469,
+        "cost_per_trade_R": 0.394,
+        "total_net_R": -37.55,
+        "profit_factor": 0.43,
+        "max_drawdown_R": 37.71,
+        "longest_losing_streak": 6,
+        "t_stat": -3.57,
+        "ci_level": 0.9995,
+        "ci_low": -0.884,
+        "ci_high": 0.008
+      },
+      "walk_forward_folds": [
+        {
+          "test": "2024-12-19..2025-01-17",
+          "trades": 11,
+          "net_expectancy_R": -0.3
+        },
+        {
+          "test": "2025-01-18..2025-02-16",
+          "trades": 11,
+          "net_expectancy_R": -0.55
+        },
+        {
+          "test": "2025-02-17..2025-03-18",
+          "trades": 11,
+          "net_expectancy_R": -0.472
+        },
+        {
+          "test": "2025-03-19..2025-04-17",
+          "trades": 11,
+          "net_expectancy_R": -0.528
+        },
+        {
+          "test": "2025-04-18..2025-05-17",
+          "trades": 17,
+          "net_expectancy_R": 0.024
+        },
+        {
+          "test": "2025-05-18..2025-06-16",
+          "trades": 13,
+          "net_expectancy_R": -0.12
+        },
+        {
+          "test": "2025-06-17..2025-07-16",
+          "trades": 18,
+          "net_expectancy_R": -0.461
+        },
+        {
+          "test": "2025-07-17..2025-08-15",
+          "trades": 18,
+          "net_expectancy_R": -0.503
+        },
+        {
+          "test": "2025-08-16..2025-09-14",
+          "trades": 16,
+          "net_expectancy_R": -0.735
+        },
+        {
+          "test": "2025-09-15..2025-10-14",
+          "trades": 9,
+          "net_expectancy_R": -0.142
+        },
+        {
+          "test": "2025-10-15..2025-11-13",
+          "trades": 14,
+          "net_expectancy_R": -0.639
+        },
+        {
+          "test": "2025-11-14..2025-12-13",
+          "trades": 9,
+          "net_expectancy_R": -0.47
+        },
+        {
+          "test": "2025-12-14..2026-01-12",
+          "trades": 14,
+          "net_expectancy_R": -0.9
+        },
+        {
+          "test": "2026-01-13..2026-02-11",
+          "trades": 7,
+          "net_expectancy_R": -0.311
+        },
+        {
+          "test": "2026-02-12..2026-03-13",
+          "trades": 13,
+          "net_expectancy_R": -0.558
+        },
+        {
+          "test": "2026-03-14..2026-04-12",
+          "trades": 10,
+          "net_expectancy_R": -0.571
+        },
+        {
+          "test": "2026-04-13..2026-05-12",
+          "trades": 12,
+          "net_expectancy_R": 0.016
+        },
+        {
+          "test": "2026-05-13..2026-06-11",
+          "trades": 9,
+          "net_expectancy_R": -1.045
+        },
+        {
+          "test": "2026-06-12..2026-07-11",
+          "trades": 16,
+          "net_expectancy_R": -0.435
+        },
+        {
+          "test": "2026-07-12..2026-08-10",
+          "trades": 13,
+          "net_expectancy_R": -0.432
+        },
+        {
+          "test": "2026-08-11..2026-09-09",
+          "trades": 14,
+          "net_expectancy_R": -0.474
+        },
+        {
+          "test": "2026-09-10..2026-10-09",
+          "trades": 13,
+          "net_expectancy_R": -0.321
+        },
+        {
+          "test": "2026-10-10..2026-10-24",
+          "trades": 7,
+          "net_expectancy_R": -0.695
+        }
+      ],
+      "folds_positive_fraction": 0.08695652173913043,
+      "by_regime_descriptive": {
+        "range": {
+          "trades": 90,
+          "win_rate": 0.289,
+          "net_expectancy_R": -0.582,
+          "total_net_R": -52.42
+        },
+        "transition": {
+          "trades": 66,
+          "win_rate": 0.333,
+          "net_expectancy_R": -0.532,
+          "total_net_R": -35.14
+        },
+        "trend": {
+          "trades": 158,
+          "win_rate": 0.367,
+          "net_expectancy_R": -0.262,
+          "total_net_R": -41.33
+        }
+      },
+      "by_time_block_descriptive": {
+        "00-04h UTC": {
+          "trades": 63,
+          "win_rate": 0.317,
+          "net_expectancy_R": -0.498,
+          "total_net_R": -31.4
+        },
+        "04-08h UTC": {
+          "trades": 43,
+          "win_rate": 0.372,
+          "net_expectancy_R": -0.351,
+          "total_net_R": -15.07
+        },
+        "08-12h UTC": {
+          "trades": 29,
+          "win_rate": 0.276,
+          "net_expectancy_R": -0.635,
+          "total_net_R": -18.43
+        },
+        "12-16h UTC": {
+          "trades": 76,
+          "win_rate": 0.316,
+          "net_expectancy_R": -0.392,
+          "total_net_R": -29.81
+        },
+        "16-20h UTC": {
+          "trades": 62,
+          "win_rate": 0.403,
+          "net_expectancy_R": -0.273,
+          "total_net_R": -16.9
+        },
+        "20-24h UTC": {
+          "trades": 41,
+          "win_rate": 0.317,
+          "net_expectancy_R": -0.422,
+          "total_net_R": -17.28
+        }
+      },
+      "cost_sensitivity_out_of_sample": {
+        "rows": [
+          {
+            "fee_pct": 0.0,
+            "net_expectancy_R": -0.198,
+            "win_rate": 0.362,
+            "total_net_R": -15.9
+          },
+          {
+            "fee_pct": 0.02,
+            "net_expectancy_R": -0.253,
+            "win_rate": 0.35,
+            "total_net_R": -20.2
+          },
+          {
+            "fee_pct": 0.05,
+            "net_expectancy_R": -0.334,
+            "win_rate": 0.338,
+            "total_net_R": -26.7
+          },
+          {
+            "fee_pct": 0.1,
+            "net_expectancy_R": -0.469,
+            "win_rate": 0.338,
+            "total_net_R": -37.6
+          },
+          {
+            "fee_pct": 0.2,
+            "net_expectancy_R": -0.741,
+            "win_rate": 0.312,
+            "total_net_R": -59.2
+          },
+          {
+            "fee_pct": 0.4,
+            "net_expectancy_R": -1.283,
+            "win_rate": 0.188,
+            "total_net_R": -102.6
+          }
+        ],
+        "breakeven_fee_pct": -0.073,
+        "note": "Fee per side as % of trade value. If the break-even fee is below your real fee, the average trade loses money."
+      },
+      "cost_sensitivity_all_sample": {
+        "rows": [
+          {
+            "fee_pct": 0.0,
+            "net_expectancy_R": -0.188,
+            "win_rate": 0.357,
+            "total_net_R": -59.0
+          },
+          {
+            "fee_pct": 0.02,
+            "net_expectancy_R": -0.232,
+            "win_rate": 0.35,
+            "total_net_R": -72.9
+          },
+          {
+            "fee_pct": 0.05,
+            "net_expectancy_R": -0.299,
+            "win_rate": 0.341,
+            "total_net_R": -93.9
+          },
+          {
+            "fee_pct": 0.1,
+            "net_expectancy_R": -0.41,
+            "win_rate": 0.338,
+            "total_net_R": -128.9
+          },
+          {
+            "fee_pct": 0.2,
+            "net_expectancy_R": -0.633,
+            "win_rate": 0.309,
+            "total_net_R": -198.8
+          },
+          {
+            "fee_pct": 0.4,
+            "net_expectancy_R": -1.079,
+            "win_rate": 0.22,
+            "total_net_R": -338.7
+          }
+        ],
+        "breakeven_fee_pct": -0.084,
+        "note": "Fee per side as % of trade value. If the break-even fee is below your real fee, the average trade loses money."
+      },
+      "top_day_share_of_total_R": null,
+      "verdict": "INSUFFICIENT_SAMPLE",
+      "verdict_reason": "only 80 out-of-sample trades; at least 100 are required before any claim"
+    },
+    "steady_scalper": {
+      "label": "steady_scalper@1.0#0d1daff4",
+      "spec": {
+        "name": "steady_scalper",
+        "version": "1.0",
+        "hypothesis": "Same entries as the trend pullback, but with tiny targets and a wide stop to win most trades.",
+        "why_crypto": "Shows why a high win rate alone does not mean making money: many small wins can be erased by a few large losses.",
+        "trigger": "Same as trend_pullback.",
+        "stop_logic": "2.5 x ATR below entry.",
+        "targets": "Half at 0.4R, half at 0.8R.",
+        "holding": "15 minutes to 3 hours"
+      },
+      "stop_atr": 2.5,
+      "t1_r": 0.4,
+      "t2_r": 0.8,
+      "blended_rr": 0.6000000000000001,
+      "all_sample_in_sample_reference": {
+        "trades": 802,
+        "win_rate": 0.434,
+        "avg_win_R": 0.274,
+        "avg_loss_R": -0.765,
+        "gross_expectancy_R": -0.056,
+        "net_expectancy_R": -0.314,
+        "cost_per_trade_R": 0.258,
+        "total_net_R": -252.0,
+        "profit_factor": 0.27,
+        "max_drawdown_R": 251.94,
+        "longest_losing_streak": 16,
+        "t_stat": -13.8,
+        "ci_level": 0.9995,
+        "ci_low": -0.385,
+        "ci_high": -0.242
+      },
+      "train": {
+        "trades": 404,
+        "win_rate": 0.512,
+        "avg_win_R": 0.283,
+        "avg_loss_R": -0.763,
+        "gross_expectancy_R": -0.016,
+        "net_expectancy_R": -0.227,
+        "cost_per_trade_R": 0.211,
+        "total_net_R": -91.69,
+        "profit_factor": 0.39,
+        "max_drawdown_R": 93.17,
+        "longest_losing_streak": 9,
+        "t_stat": -7.29,
+        "ci_level": 0.9995,
+        "ci_low": -0.332,
+        "ci_high": -0.134
+      },
+      "validation": {
+        "trades": 181,
+        "win_rate": 0.309,
+        "avg_win_R": 0.24,
+        "avg_loss_R": -0.713,
+        "gross_expectancy_R": -0.123,
+        "net_expectancy_R": -0.418,
+        "cost_per_trade_R": 0.295,
+        "total_net_R": -75.7,
+        "profit_factor": 0.15,
+        "max_drawdown_R": 75.67,
+        "longest_losing_streak": 9,
+        "t_stat": -9.22,
+        "ci_level": 0.9995,
+        "ci_low": -0.57,
+        "ci_high": -0.269
+      },
+      "out_of_sample_reported_once": {
+        "trades": 217,
+        "win_rate": 0.392,
+        "avg_win_R": 0.273,
+        "avg_loss_R": -0.817,
+        "gross_expectancy_R": -0.074,
+        "net_expectancy_R": -0.39,
+        "cost_per_trade_R": 0.315,
+        "total_net_R": -84.62,
+        "profit_factor": 0.22,
+        "max_drawdown_R": 85.19,
+        "longest_losing_streak": 16,
+        "t_stat": -8.35,
+        "ci_level": 0.9995,
+        "ci_low": -0.526,
+        "ci_high": -0.243
+      },
+      "walk_forward_folds": [
+        {
+          "test": "2024-12-19..2025-01-17",
+          "trades": 36,
+          "net_expectancy_R": -0.243
+        },
+        {
+          "test": "2025-01-18..2025-02-16",
+          "trades": 38,
+          "net_expectancy_R": -0.122
+        },
+        {
+          "test": "2025-02-17..2025-03-18",
+          "trades": 19,
+          "net_expectancy_R": -0.462
+        },
+        {
+          "test": "2025-03-19..2025-04-17",
+          "trades": 26,
+          "net_expectancy_R": -0.358
+        },
+        {
+          "test": "2025-04-18..2025-05-17",
+          "trades": 40,
+          "net_expectancy_R": -0.065
+        },
+        {
+          "test": "2025-05-18..2025-06-16",
+          "trades": 26,
+          "net_expectancy_R": -0.105
+        },
+        {
+          "test": "2025-06-17..2025-07-16",
+          "trades": 41,
+          "net_expectancy_R": -0.267
+        },
+        {
+          "test": "2025-07-17..2025-08-15",
+          "trades": 38,
+          "net_expectancy_R": -0.237
+        },
+        {
+          "test": "2025-08-16..2025-09-14",
+          "trades": 33,
+          "net_expectancy_R": -0.619
+        },
+        {
+          "test": "2025-09-15..2025-10-14",
+          "trades": 27,
+          "net_expectancy_R": -0.083
+        },
+        {
+          "test": "2025-10-15..2025-11-13",
+          "trades": 37,
+          "net_expectancy_R": -0.189
+        },
+        {
+          "test": "2025-11-14..2025-12-13",
+          "trades": 20,
+          "net_expectancy_R": -0.359
+        },
+        {
+          "test": "2025-12-14..2026-01-12",
+          "trades": 26,
+          "net_expectancy_R": -0.455
+        },
+        {
+          "test": "2026-01-13..2026-02-11",
+          "trades": 11,
+          "net_expectancy_R": -0.814
+        },
+        {
+          "test": "2026-02-12..2026-03-13",
+          "trades": 35,
+          "net_expectancy_R": -0.428
+        },
+        {
+          "test": "2026-03-14..2026-04-12",
+          "trades": 42,
+          "net_expectancy_R": -0.489
+        },
+        {
+          "test": "2026-04-13..2026-05-12",
+          "trades": 43,
+          "net_expectancy_R": -0.256
+        },
+        {
+          "test": "2026-05-13..2026-06-11",
+          "trades": 12,
+          "net_expectancy_R": -0.931
+        },
+        {
+          "test": "2026-06-12..2026-07-11",
+          "trades": 42,
+          "net_expectancy_R": -0.562
+        },
+        {
+          "test": "2026-07-12..2026-08-10",
+          "trades": 32,
+          "net_expectancy_R": -0.372
+        },
+        {
+          "test": "2026-08-11..2026-09-09",
+          "trades": 45,
+          "net_expectancy_R": -0.392
+        },
+        {
+          "test": "2026-09-10..2026-10-09",
+          "trades": 47,
+          "net_expectancy_R": -0.25
+        },
+        {
+          "test": "2026-10-10..2026-10-24",
+          "trades": 13,
+          "net_expectancy_R": -0.331
+        }
+      ],
+      "folds_positive_fraction": 0.0,
+      "by_regime_descriptive": {
+        "transition": {
+          "trades": 187,
+          "win_rate": 0.412,
+          "net_expectancy_R": -0.363,
+          "total_net_R": -67.94
+        },
+        "trend": {
+          "trades": 615,
+          "win_rate": 0.441,
+          "net_expectancy_R": -0.299,
+          "total_net_R": -184.06
+        }
+      },
+      "by_time_block_descriptive": {
+        "00-04h UTC": {
+          "trades": 138,
+          "win_rate": 0.442,
+          "net_expectancy_R": -0.314,
+          "total_net_R": -43.36
+        },
+        "04-08h UTC": {
+          "trades": 117,
+          "win_rate": 0.427,
+          "net_expectancy_R": -0.267,
+          "total_net_R": -31.21
+        },
+        "08-12h UTC": {
+          "trades": 128,
+          "win_rate": 0.359,
+          "net_expectancy_R": -0.453,
+          "total_net_R": -57.94
+        },
+        "12-16h UTC": {
+          "trades": 164,
+          "win_rate": 0.451,
+          "net_expectancy_R": -0.341,
+          "total_net_R": -55.95
+        },
+        "16-20h UTC": {
+          "trades": 133,
+          "win_rate": 0.504,
+          "net_expectancy_R": -0.228,
+          "total_net_R": -30.27
+        },
+        "20-24h UTC": {
+          "trades": 122,
+          "win_rate": 0.41,
+          "net_expectancy_R": -0.273,
+          "total_net_R": -33.27
+        }
+      },
+      "cost_sensitivity_out_of_sample": {
+        "rows": [
+          {
+            "fee_pct": 0.0,
+            "net_expectancy_R": -0.165,
+            "win_rate": 0.558,
+            "total_net_R": -35.9
+          },
+          {
+            "fee_pct": 0.02,
+            "net_expectancy_R": -0.21,
+            "win_rate": 0.548,
+            "total_net_R": -45.6
+          },
+          {
+            "fee_pct": 0.05,
+            "net_expectancy_R": -0.278,
+            "win_rate": 0.516,
+            "total_net_R": -60.3
+          },
+          {
+            "fee_pct": 0.1,
+            "net_expectancy_R": -0.39,
+            "win_rate": 0.392,
+            "total_net_R": -84.6
+          },
+          {
+            "fee_pct": 0.2,
+            "net_expectancy_R": -0.615,
+            "win_rate": 0.249,
+            "total_net_R": -133.4
+          },
+          {
+            "fee_pct": 0.4,
+            "net_expectancy_R": -1.064,
+            "win_rate": 0.023,
+            "total_net_R": -230.8
+          }
+        ],
+        "breakeven_fee_pct": -0.074,
+        "note": "Fee per side as % of trade value. If the break-even fee is below your real fee, the average trade loses money."
+      },
+      "cost_sensitivity_all_sample": {
+        "rows": [
+          {
+            "fee_pct": 0.0,
+            "net_expectancy_R": -0.13,
+            "win_rate": 0.56,
+            "total_net_R": -104.4
+          },
+          {
+            "fee_pct": 0.02,
+            "net_expectancy_R": -0.167,
+            "win_rate": 0.552,
+            "total_net_R": -133.9
+          },
+          {
+            "fee_pct": 0.05,
+            "net_expectancy_R": -0.222,
+            "win_rate": 0.525,
+            "total_net_R": -178.2
+          },
+          {
+            "fee_pct": 0.1,
+            "net_expectancy_R": -0.314,
+            "win_rate": 0.434,
+            "total_net_R": -252.0
+          },
+          {
+            "fee_pct": 0.2,
+            "net_expectancy_R": -0.498,
+            "win_rate": 0.274,
+            "total_net_R": -399.6
+          },
+          {
+            "fee_pct": 0.4,
+            "net_expectancy_R": -0.866,
+            "win_rate": 0.091,
+            "total_net_R": -694.7
+          }
+        ],
+        "breakeven_fee_pct": -0.071,
+        "note": "Fee per side as % of trade value. If the break-even fee is below your real fee, the average trade loses money."
+      },
+      "top_day_share_of_total_R": null,
+      "verdict": "FAILED_OOS",
+      "verdict_reason": "out-of-sample net expectancy -0.39R and the CI upper bound -0.243R is below zero"
+    }
+  },
+  "multiple_testing": {
+    "strategies_evaluated": 9,
+    "family_size": 108,
+    "ci_level_used": 0.99954,
+    "note": "Bonferroni-adjusted across all 108 strategy-by-coin tests, so adding coins makes the pass bar stricter. No parameter search was run, so nothing was tuned on the data."
+  },
+  "warnings": [],
+  "limitations": [
+    "Bootstrap CIs ignore serial correlation between trades.",
+    "AERO trades mainly on the Aerodrome DEX on Base; this uses the Coinbase AERO-USD price as a stand-in, so real DEX costs and slippage can differ.",
+    "Slippage per coin is an assumption (smaller or thinner coins get a larger number). Real fills can be worse, especially in fast markets.",
+    "Only one market regime may be covered; crypto cycles are long.",
+    "Past results do not predict future results."
+  ]
+}
