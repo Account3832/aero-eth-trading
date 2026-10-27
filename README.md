@@ -28,12 +28,13 @@ switch this on are still managed and closed normally.
 | oversold_bounce | Sharp "liquidation wick" flush, then price reclaims the level | tested; trades only after a pass |
 | support_bounce | In an uptrend, a dip to the last higher low that gets rejected (classic support) | tested; trades only after a pass |
 | swing_breakout | Strong close above the last swing high on volume (classic resistance break) | tested; trades only after a pass |
+| zone_rejection | Trader-style checklist: a rejection candle at a STRONG support zone, with the bigger trend up, at least 2R of room before resistance, and the stop just under the zone | tested; trades only after a pass |
 | range_bounce, btc_lead, steady_scalper | Comparison ideas | comparison; trades only after a pass |
 
 Practice trades are limited: 1 per coin at a time, 2 total, 6 a day per coin, stop trading for the day after losing 2%.
 
 ## Chart reading (support, resistance and trends within trends)
-The **Levels & Trends** tab reads the chart like a chart technician: trend on four scales (daily, 4-hour, 1-hour, 15-minute), swing highs and lows,
+The **Levels & Trends** tab reads the chart like a chart technician: trend on five scales (daily, 4-hour, 1-hour, 15-minute, and a 5-minute "Micro" scale for timing; 5 minutes is the shortest the free data allows), swing highs and lows,
 support/resistance zones ranked Strong / Moderate / Weak (more touches, more time scales and more recent = stronger), trendlines, and a plain-English summary
 (for example "a pullback inside a larger uptrend"). Every buy alert also says how much room there is before the next resistance zone.
 This is information only: it does not block or change practice trades, and nothing about it is proven until the fair test says so.
