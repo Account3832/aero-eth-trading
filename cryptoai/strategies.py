@@ -47,6 +47,8 @@ class Strategy:
     t1_r = 1.5
     t2_r = 3.0
     max_hold_hours = 6.0
+    needs_chart = False      # True = also needs the multi-scale chart checklist and chart-based exits (backtester and live monitor apply them)
+    min_room_r = None        # for needs_chart strategies: minimum room to resistance, in R
 
     def __init__(self, filters=None, stop_atr=None, t1_r=None, t2_r=None, **params):
         self.filters = tuple(self.default_filters if filters is None else filters)
@@ -224,6 +226,30 @@ class SwingBreakout(Strategy):
         return (first & strong & (d.rvol >= 1.3) & (d.sw_trend >= 0)).fillna(False), "first strong close above the last swing high"
 
 
+class ZoneRejection(Strategy):
+    """Trader-style checklist: a rejection candle at a STRONG support zone, with the bigger trend up, room to run, and a stop behind the zone.
+    The candle test is cheap and runs on every bar; the chart checklist (levels.confluence_check) and the chart-based exits are applied
+    by the backtester and the live monitor, because they need the multi-scale chart analysis as of that candle."""
+    spec = StrategySpec(
+        "zone_rejection", "1.0",
+        "A candle that dips into a strong support zone and is rejected, while the bigger trend is up and there is room to run, tends to bounce.",
+        "How chart traders actually use support: only strong zones, only with the bigger trend, only with a rejection candle, stop behind the zone.",
+        "Bullish rejection candle (closes in the top 40% of its range, lower wick at least 40% of range, range at least 0.8 ATR) while the 1-hour trend is up; "
+        "then the chart checklist must pass: bigger trend up, strong support zone touched, entry within 1.5 ATR of it.",
+        "Just below the support zone (chart-based).", "Just under the next resistance zones; at least 2R of room is required.", "1 to 12 hours")
+    default_filters = ("htf", "btc")
+    needs_chart = True
+    min_room_r = 2.0
+    max_hold_hours = 12.0
+
+    def raw(self, d):
+        rng = (d.high - d.low)
+        pos = (d.close - d.low) / rng.where(rng > 0)
+        wick = (d[["open", "close"]].min(axis=1) - d.low) / rng.where(rng > 0)
+        cond = ((d.close > d.open) & (pos >= 0.6) & (wick >= 0.4) & (rng >= 0.8 * d.atr)).fillna(False)
+        return cond, "rejection candle at support"
+
+
 class SteadyScalper(TrendPullback):
     """A deliberate demonstration of the high-win-rate trap: tiny targets, wide stop. Comparison only, never traded."""
     spec = StrategySpec(
@@ -247,7 +273,7 @@ class Baseline1hTrend(Strategy):
 
 
 REGISTRY = {c.spec.name: c for c in (TrendPullback, DonchianBreakout, SqueezeBreakout, OversoldBounce, RangeBounce, BtcLead,
-                                     SupportBounce, SwingBreakout, SteadyScalper)}
+                                     SupportBounce, SwingBreakout, SteadyScalper, ZoneRejection)}
 BASELINE = Baseline1hTrend
 
 

@@ -10,7 +10,7 @@ import math
 import pandas as pd
 
 from .config import Settings
-from .levels import room_to_levels, structure_plan
+from .levels import confluence_check, room_to_levels, structure_plan
 from .paper import size_position
 from .strategies import BASELINE, REGISTRY
 
@@ -67,7 +67,12 @@ def scan(s: Settings, feats: pd.DataFrame, symbol: str, names=None, levels: dict
             row.update(status="OFF", note=f"could not be checked: {type(e).__name__}")
             rows.append(row)
             continue
-        if int(sig["dir"]) == 1 and atr:
+        chart_strat = bool(getattr(inst, "needs_chart", False))
+        cf_fail = ""
+        if chart_strat and int(sig["dir"]) == 1 and atr:       # the chart checklist decides whether the candle is a real signal
+            cf = confluence_check(levels, float(last.close), atr, float(last.low), float(last.close))
+            cf_fail = "" if cf["ok"] else cf["why"]
+        if int(sig["dir"]) == 1 and atr and not cf_fail:
             risk = inst.stop_atr * atr
             entry = float(last.close)
             size = size_position(s, symbol, entry, risk)
@@ -75,10 +80,13 @@ def scan(s: Settings, feats: pd.DataFrame, symbol: str, names=None, levels: dict
                        stop=round(entry - risk, dp), target1=round(entry + inst.t1_r * risk, dp), target2=round(entry + inst.t2_r * risk, dp),
                        units=size["units"], notional_usd=size["notional_usd"], risk_usd=size["risk_usd"],
                        note="The rule fired on the newest completed candle. Entry would be the NEXT candle's open.")
-            cp = structure_plan(levels, entry, atr, True, **s.struct_params())
+            sp_ = s.struct_params()
+            if getattr(inst, "min_room_r", None):
+                sp_["min_room_r"] = inst.min_room_r
+            cp = structure_plan(levels, entry, atr, True, **sp_)
             row["chart_plan"] = {k: (round(v, dp + 1) if isinstance(v, float) else v) for k, v in cp.items()}
             row["plan_mode"] = "atr"
-            if s.exit_mode == "chart":
+            if s.exit_mode == "chart" or chart_strat:
                 if cp["ok"]:
                     size = size_position(s, symbol, entry, cp["risk"])
                     row.update(plan_mode="chart", stop=round(cp["stop"], dp), target1=round(cp["t1"], dp), target2=round(cp["t2"], dp),
@@ -95,6 +103,8 @@ def scan(s: Settings, feats: pd.DataFrame, symbol: str, names=None, levels: dict
                 blk = inst.blockers(feats)
             except Exception:  # noqa: BLE001
                 blk = []
+            if cf_fail:
+                blk = list(blk) + [cf_fail]
             if blk:
                 row.update(status="FORMING", note="The trigger candle appeared, but " + "; ".join(blk) + ".")
             else:

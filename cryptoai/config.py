@@ -68,7 +68,7 @@ class Settings:
     min_trades_for_claim: int = 100
     enabled_strategies: tuple = ("trend_pullback", "donchian_breakout", "squeeze_breakout", "oversold_bounce")
     # tested and reported, but never used for practice trades until they pass the fair test and are moved above
-    research_only_strategies: tuple = ("range_bounce", "btc_lead", "support_bounce", "swing_breakout", "steady_scalper")
+    research_only_strategies: tuple = ("range_bounce", "btc_lead", "support_bounce", "swing_breakout", "steady_scalper", "zone_rejection")
     notify_research_signals: bool = False
     # True = practice trades and phone alerts happen ONLY for a strategy that passed the fair test on that coin (verdict EDGE_SUPPORTED).
     alert_only_proven: bool = True

@@ -17,7 +17,7 @@ import numpy as np
 import pandas as pd
 
 from .config import Settings
-from .levels import structure_plan
+from .levels import confluence_check, structure_plan
 from .strategies import BASELINE, REGISTRY, Strategy
 
 FEE_LEVELS = (0.0, 0.02, 0.05, 0.10, 0.20, 0.40)   # % per side, for the sensitivity table
@@ -77,16 +77,22 @@ COLS = ["strategy", "label", "date", "signal_time", "entry_time", "exit_time", "
         "exit_reason", "regime", "utc_block", "trigger"]
 
 
-def _plan_for(engine, d, i, s, entry, atr_i, strat):
+def _plan_for(engine, d, i, s, entry, atr_i, strat, a=None):
     """Chart-based stop and targets at signal bar i, using only candles complete at that bar's close."""
-    a = engine.at(d.index[i] + pd.Timedelta(minutes=s.entry_minutes), full=False)
-    return structure_plan(a, entry, atr_i, True, **s.struct_params())
+    a = a if a is not None else engine.at(d.index[i] + pd.Timedelta(minutes=s.entry_minutes), full=False)
+    params = s.struct_params()
+    if getattr(strat, "min_room_r", None):
+        params["min_room_r"] = strat.min_room_r
+    return structure_plan(a, entry, atr_i, True, **params)
 
 
 def simulate(d: pd.DataFrame, strat: Strategy, s: Settings, symbol: str, dates: set | None = None, engine=None, exit_mode: str = "atr",
              skips: list | None = None) -> pd.DataFrame:
     """exit_mode "chart" needs `engine` (levels.Engine) and takes stop/targets from support and resistance zones; trades with no clean
     chart plan are passed (their reasons are appended to `skips`)."""
+    chart_strat = bool(getattr(strat, "needs_chart", False))
+    if chart_strat and engine is None:
+        return pd.DataFrame([], columns=COLS)      # a chart-checklist strategy cannot be tested without the chart engine
     sig = strat.signals(d)
     dirs = sig["dir"].values
     n = len(d)
@@ -110,8 +116,15 @@ def simulate(d: pd.DataFrame, strat: Strategy, s: Settings, symbol: str, dates: 
         entry = e_ref + slip
         risk = strat.stop_atr * atr[i]
         stop, t1, t2 = entry - risk, entry + strat.t1_r * risk, entry + strat.t2_r * risk
-        if exit_mode == "chart":
-            pl = _plan_for(engine, d, i, s, entry, atr[i], strat)
+        if exit_mode == "chart" or chart_strat:
+            a_i = engine.at(idx[i] + pd.Timedelta(minutes=s.entry_minutes), full=False)
+            if chart_strat:
+                cf = confluence_check(a_i, entry, atr[i], l[i], c[i])
+                if not cf["ok"]:
+                    if skips is not None:
+                        skips.append({"strategy": strat.name, "signal_time": idx[i], "date": dte, "reason": cf["why"]})
+                    continue
+            pl = _plan_for(engine, d, i, s, entry, atr[i], strat, a_i)
             if not pl["ok"]:
                 if skips is not None:
                     skips.append({"strategy": strat.name, "signal_time": idx[i], "date": dte, "reason": pl["fail"]})
@@ -312,6 +325,8 @@ def edge_verdict(oos: dict, folds_pos_frac: float | None, base_oos_exp: float | 
 
 def run_research(d: pd.DataFrame, s: Settings, symbol: str, strategy_names=None, engine=None, family_size: int | None = None) -> dict:
     names = list(strategy_names or (*s.enabled_strategies, *s.research_only_strategies))
+    if engine is None:
+        names = [n for n in names if not getattr(REGISTRY[n], "needs_chart", False)]
     dates = sorted(set(d.date))
     sp = chrono_split(dates)
     fam = max(int(family_size or 0), len(names), 1)   # every strategy-by-coin test in the study, not just this coin
@@ -325,7 +340,7 @@ def run_research(d: pd.DataFrame, s: Settings, symbol: str, strategy_names=None,
     results = {}
     for name in names:
         strat = REGISTRY[name]()
-        t = simulate(d, strat, s, symbol)
+        t = simulate(d, strat, s, symbol, engine=engine)
         oos_t = _slice(t, sp["oos"])
         oos = metrics(oos_t, level)
         fold_res = []
