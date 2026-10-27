@@ -104,7 +104,7 @@ def test_room_to_levels_blocks_target():
 
 def test_analyze_end_to_end_and_json():
     a = L.analyze(make_bars(300, seed=5, price=2500), L.CRYPTO_TFS)
-    assert a["ok"] and len(a["timeframes"]) == 4 and a["zones"]
+    assert a["ok"] and len(a["timeframes"]) == 5 and a["zones"]
     json.dumps(a)
     sup = a["nearest_support"]; res = a["nearest_resistance"]
     if sup:
