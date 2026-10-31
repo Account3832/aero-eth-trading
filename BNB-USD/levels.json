@@ -1,0 +1,773 @@
+{
+  "ok": true,
+  "asof": "2026-10-31 20:10:00+00:00",
+  "price": 705.21,
+  "timeframes": [
+    {
+      "label": "Primary",
+      "tf": "1D",
+      "weight": 3.0,
+      "bars": 374,
+      "limited_history": false,
+      "direction": "RANGE",
+      "pattern": "lower highs but higher lows (price is coiling, a breakout is coming)",
+      "state": "coiling",
+      "swing_high": 751.2,
+      "swing_low": 717.27,
+      "prev_swing_high": 810.38,
+      "prev_swing_low": 704.95,
+      "invalidation": null,
+      "ema_state": "mixed"
+    },
+    {
+      "label": "Secondary",
+      "tf": "4h",
+      "weight": 2.0,
+      "bars": 2245,
+      "limited_history": false,
+      "direction": "DOWN",
+      "pattern": "lower highs and lower lows",
+      "state": "intact",
+      "swing_high": 709.63,
+      "swing_low": 679.0,
+      "prev_swing_high": 760.06,
+      "prev_swing_low": 733.0,
+      "invalidation": 709.63,
+      "ema_state": "bearish (price below falling averages)"
+    },
+    {
+      "label": "Intermediate",
+      "tf": "1h",
+      "weight": 1.5,
+      "bars": 8978,
+      "limited_history": false,
+      "direction": "RANGE",
+      "pattern": "lower highs but higher lows (price is coiling, a breakout is coming)",
+      "state": "coiling",
+      "swing_high": 707.43,
+      "swing_low": 701.81,
+      "prev_swing_high": 709.63,
+      "prev_swing_low": 697.85,
+      "invalidation": null,
+      "ema_state": "mixed"
+    },
+    {
+      "label": "Minor",
+      "tf": "15m",
+      "weight": 1.0,
+      "bars": 35909,
+      "limited_history": false,
+      "direction": "UP",
+      "pattern": "higher highs and higher lows",
+      "state": "intact",
+      "swing_high": 707.43,
+      "swing_low": 703.43,
+      "prev_swing_high": 705.33,
+      "prev_swing_low": 701.81,
+      "invalidation": 703.43,
+      "ema_state": "mixed"
+    },
+    {
+      "label": "Micro",
+      "tf": "5m",
+      "weight": 0.5,
+      "bars": 107729,
+      "limited_history": false,
+      "direction": "UP",
+      "pattern": "higher highs and higher lows",
+      "state": "intact",
+      "swing_high": 706.79,
+      "swing_low": 705.01,
+      "prev_swing_high": 706.75,
+      "prev_swing_low": 704.83,
+      "invalidation": 705.01,
+      "ema_state": "mixed"
+    }
+  ],
+  "alignment": {
+    "score": -0.06,
+    "kind": "BOUNCE_IN_DOWNTREND",
+    "text": "A bounce inside a larger DOWNTREND. Moves against the bigger trend are lower odds.",
+    "bias": "NEUTRAL"
+  },
+  "zones": [
+    {
+      "low": 718.7371245211092,
+      "high": 720.2828754788908,
+      "mid": 719.77,
+      "role": "resistance",
+      "former": null,
+      "touches": 2,
+      "tfs": [
+        "1D",
+        "1h"
+      ],
+      "labels": [
+        "Intermediate",
+        "Primary",
+        "prior day high",
+        "round number"
+      ],
+      "score": 5.9,
+      "strength": "Moderate",
+      "dist_atr": 3.92,
+      "dist_pct": 2.06,
+      "age_days": 1.6,
+      "last_touch": "2026-10-30 05:00:00+00:00"
+    },
+    {
+      "low": 716.3671245211092,
+      "high": 717.4928754788908,
+      "mid": 717.0433333333334,
+      "role": "resistance",
+      "former": "was support, now resistance (role reversal)",
+      "touches": 3,
+      "tfs": [
+        "1D",
+        "4h"
+      ],
+      "labels": [
+        "Primary",
+        "Secondary"
+      ],
+      "score": 8.0,
+      "strength": "Strong",
+      "dist_atr": 3.19,
+      "dist_pct": 1.68,
+      "age_days": 7.3,
+      "last_touch": "2026-10-24 12:00:00+00:00"
+    },
+    {
+      "low": 709.4071245211092,
+      "high": 710.2228754788908,
+      "mid": 709.7225,
+      "role": "resistance",
+      "former": null,
+      "touches": 3,
+      "tfs": [
+        "15m",
+        "1h",
+        "4h"
+      ],
+      "labels": [
+        "Intermediate",
+        "Minor",
+        "Secondary",
+        "round number"
+      ],
+      "score": 4.9,
+      "strength": "Moderate",
+      "dist_atr": 1.21,
+      "dist_pct": 0.64,
+      "age_days": 0.8,
+      "last_touch": "2026-10-31 00:15:00+00:00"
+    },
+    {
+      "low": 707.2071245211091,
+      "high": 707.6528754788908,
+      "mid": 707.43,
+      "role": "resistance",
+      "former": null,
+      "touches": 2,
+      "tfs": [
+        "15m",
+        "1h"
+      ],
+      "labels": [
+        "Intermediate",
+        "Minor"
+      ],
+      "score": 2.5,
+      "strength": "Weak",
+      "dist_atr": 0.6,
+      "dist_pct": 0.31,
+      "age_days": 0.2,
+      "last_touch": "2026-10-31 14:45:00+00:00"
+    },
+    {
+      "low": 704.7271245211092,
+      "high": 705.6328754788908,
+      "mid": 705.275,
+      "role": "inside",
+      "former": null,
+      "touches": 4,
+      "tfs": [
+        "15m",
+        "1D",
+        "1h"
+      ],
+      "labels": [
+        "Intermediate",
+        "Minor",
+        "Primary"
+      ],
+      "score": 6.5,
+      "strength": "Strong",
+      "dist_atr": 0.02,
+      "dist_pct": 0.01,
+      "age_days": 0.3,
+      "last_touch": "2026-10-31 12:30:00+00:00"
+    },
+    {
+      "low": 701.5871245211091,
+      "high": 703.9028754788908,
+      "mid": 702.755,
+      "role": "support",
+      "former": null,
+      "touches": 9,
+      "tfs": [
+        "15m",
+        "1D",
+        "1h"
+      ],
+      "labels": [
+        "Intermediate",
+        "Minor",
+        "Primary",
+        "prior day close"
+      ],
+      "score": 14.5,
+      "strength": "Strong",
+      "dist_atr": 0.66,
+      "dist_pct": 0.35,
+      "age_days": 0.2,
+      "last_touch": "2026-10-31 16:15:00+00:00"
+    },
+    {
+      "low": 699.6271245211092,
+      "high": 700.2228754788908,
+      "mid": 699.925,
+      "role": "support",
+      "former": null,
+      "touches": 1,
+      "tfs": [
+        "15m"
+      ],
+      "labels": [
+        "Minor",
+        "major round number"
+      ],
+      "score": 2.0,
+      "strength": "Weak",
+      "dist_atr": 1.42,
+      "dist_pct": 0.75,
+      "age_days": 0.7,
+      "last_touch": "2026-10-31 04:30:00+00:00"
+    },
+    {
+      "low": 697.6271245211092,
+      "high": 698.0728754788909,
+      "mid": 697.85,
+      "role": "support",
+      "former": null,
+      "touches": 2,
+      "tfs": [
+        "15m",
+        "1h"
+      ],
+      "labels": [
+        "Intermediate",
+        "Minor"
+      ],
+      "score": 2.5,
+      "strength": "Weak",
+      "dist_atr": 1.98,
+      "dist_pct": 1.04,
+      "age_days": 0.5,
+      "last_touch": "2026-10-31 08:00:00+00:00"
+    },
+    {
+      "low": 694.1271245211092,
+      "high": 695.1728754788909,
+      "mid": 694.5500000000001,
+      "role": "support",
+      "former": null,
+      "touches": 3,
+      "tfs": [
+        "15m",
+        "1h"
+      ],
+      "labels": [
+        "Intermediate",
+        "Minor"
+      ],
+      "score": 3.5,
+      "strength": "Moderate",
+      "dist_atr": 2.87,
+      "dist_pct": 1.51,
+      "age_days": 0.9,
+      "last_touch": "2026-10-30 21:45:00+00:00"
+    }
+  ],
+  "nearest_support": {
+    "low": 701.5871245211091,
+    "high": 703.9028754788908,
+    "mid": 702.755,
+    "role": "support",
+    "former": null,
+    "touches": 9,
+    "tfs": [
+      "15m",
+      "1D",
+      "1h"
+    ],
+    "labels": [
+      "Intermediate",
+      "Minor",
+      "Primary",
+      "prior day close"
+    ],
+    "score": 14.5,
+    "strength": "Strong",
+    "dist_atr": 0.66,
+    "dist_pct": 0.35,
+    "age_days": 0.2,
+    "last_touch": "2026-10-31 16:15:00+00:00"
+  },
+  "nearest_resistance": {
+    "low": 707.2071245211091,
+    "high": 707.6528754788908,
+    "mid": 707.43,
+    "role": "resistance",
+    "former": null,
+    "touches": 2,
+    "tfs": [
+      "15m",
+      "1h"
+    ],
+    "labels": [
+      "Intermediate",
+      "Minor"
+    ],
+    "score": 2.5,
+    "strength": "Weak",
+    "dist_atr": 0.6,
+    "dist_pct": 0.31,
+    "age_days": 0.2,
+    "last_touch": "2026-10-31 14:45:00+00:00"
+  },
+  "trendlines": [
+    {
+      "tf": "1D",
+      "kind": "support",
+      "t1": "2026-10-18 00:00:00+00:00",
+      "p1": 704.95,
+      "t2": "2026-10-24 00:00:00+00:00",
+      "p2": 717.27,
+      "t_now": "2026-10-30 00:00:00+00:00",
+      "p_now": 729.5899999999999,
+      "touches": 2,
+      "broken": true,
+      "note": "rising support line",
+      "scale": "Primary"
+    },
+    {
+      "tf": "1D",
+      "kind": "resistance",
+      "t1": "2026-10-05 00:00:00+00:00",
+      "p1": 810.38,
+      "t2": "2026-10-21 00:00:00+00:00",
+      "p2": 751.2,
+      "t_now": "2026-10-30 00:00:00+00:00",
+      "p_now": 717.9112500000001,
+      "touches": 2,
+      "broken": false,
+      "note": "falling resistance line",
+      "scale": "Primary"
+    },
+    {
+      "tf": "4h",
+      "kind": "resistance",
+      "t1": "2026-10-29 00:00:00+00:00",
+      "p1": 760.06,
+      "t2": "2026-10-31 00:00:00+00:00",
+      "p2": 709.63,
+      "t_now": "2026-10-31 16:00:00+00:00",
+      "p_now": 692.82,
+      "touches": 2,
+      "broken": true,
+      "note": "falling resistance line",
+      "scale": "Secondary"
+    },
+    {
+      "tf": "1h",
+      "kind": "support",
+      "t1": "2026-10-31 08:00:00+00:00",
+      "p1": 697.85,
+      "t2": "2026-10-31 14:00:00+00:00",
+      "p2": 701.81,
+      "t_now": "2026-10-31 19:00:00+00:00",
+      "p_now": 705.1099999999999,
+      "touches": 2,
+      "broken": false,
+      "note": "rising support line",
+      "scale": "Intermediate"
+    },
+    {
+      "tf": "1h",
+      "kind": "resistance",
+      "t1": "2026-10-31 00:00:00+00:00",
+      "p1": 709.63,
+      "t2": "2026-10-31 14:00:00+00:00",
+      "p2": 707.43,
+      "t_now": "2026-10-31 19:00:00+00:00",
+      "p_now": 706.6442857142856,
+      "touches": 2,
+      "broken": false,
+      "note": "falling resistance line",
+      "scale": "Intermediate"
+    },
+    {
+      "tf": "15m",
+      "kind": "support",
+      "t1": "2026-10-31 14:00:00+00:00",
+      "p1": 701.81,
+      "t2": "2026-10-31 16:15:00+00:00",
+      "p2": 703.43,
+      "t_now": "2026-10-31 19:45:00+00:00",
+      "p_now": 705.9499999999999,
+      "touches": 2,
+      "broken": true,
+      "note": "rising support line",
+      "scale": "Minor"
+    },
+    {
+      "tf": "5m",
+      "kind": "support",
+      "t1": "2026-10-31 18:25:00+00:00",
+      "p1": 704.83,
+      "t2": "2026-10-31 19:20:00+00:00",
+      "p2": 705.01,
+      "t_now": "2026-10-31 20:05:00+00:00",
+      "p_now": 705.1572727272727,
+      "touches": 2,
+      "broken": false,
+      "note": "rising support line",
+      "scale": "Micro"
+    }
+  ],
+  "pivots": {
+    "Primary": [
+      {
+        "time": "2026-08-28 00:00:00+00:00",
+        "price": 718.96,
+        "kind": "H"
+      },
+      {
+        "time": "2026-09-01 00:00:00+00:00",
+        "price": 674.41,
+        "kind": "L"
+      },
+      {
+        "time": "2026-09-05 00:00:00+00:00",
+        "price": 780.71,
+        "kind": "H"
+      },
+      {
+        "time": "2026-09-10 00:00:00+00:00",
+        "price": 703.42,
+        "kind": "L"
+      },
+      {
+        "time": "2026-09-16 00:00:00+00:00",
+        "price": 703.68,
+        "kind": "L"
+      },
+      {
+        "time": "2026-09-21 00:00:00+00:00",
+        "price": 814.41,
+        "kind": "H"
+      },
+      {
+        "time": "2026-09-29 00:00:00+00:00",
+        "price": 750.48,
+        "kind": "L"
+      },
+      {
+        "time": "2026-10-05 00:00:00+00:00",
+        "price": 810.38,
+        "kind": "H"
+      },
+      {
+        "time": "2026-10-08 00:00:00+00:00",
+        "price": 716.59,
+        "kind": "L"
+      },
+      {
+        "time": "2026-10-18 00:00:00+00:00",
+        "price": 704.95,
+        "kind": "L"
+      },
+      {
+        "time": "2026-10-21 00:00:00+00:00",
+        "price": 751.2,
+        "kind": "H"
+      },
+      {
+        "time": "2026-10-24 00:00:00+00:00",
+        "price": 717.27,
+        "kind": "L"
+      }
+    ],
+    "Secondary": [
+      {
+        "time": "2026-10-22 16:00:00+00:00",
+        "price": 724.69,
+        "kind": "L"
+      },
+      {
+        "time": "2026-10-23 12:00:00+00:00",
+        "price": 749.4,
+        "kind": "H"
+      },
+      {
+        "time": "2026-10-24 12:00:00+00:00",
+        "price": 717.27,
+        "kind": "L"
+      },
+      {
+        "time": "2026-10-25 04:00:00+00:00",
+        "price": 747.79,
+        "kind": "H"
+      },
+      {
+        "time": "2026-10-26 08:00:00+00:00",
+        "price": 731.7,
+        "kind": "L"
+      },
+      {
+        "time": "2026-10-26 12:00:00+00:00",
+        "price": 746.18,
+        "kind": "H"
+      },
+      {
+        "time": "2026-10-27 08:00:00+00:00",
+        "price": 733.0,
+        "kind": "L"
+      },
+      {
+        "time": "2026-10-27 12:00:00+00:00",
+        "price": 752.69,
+        "kind": "H"
+      },
+      {
+        "time": "2026-10-28 08:00:00+00:00",
+        "price": 761.19,
+        "kind": "H"
+      },
+      {
+        "time": "2026-10-29 00:00:00+00:00",
+        "price": 760.06,
+        "kind": "H"
+      },
+      {
+        "time": "2026-10-29 20:00:00+00:00",
+        "price": 679.0,
+        "kind": "L"
+      },
+      {
+        "time": "2026-10-31 00:00:00+00:00",
+        "price": 709.63,
+        "kind": "H"
+      }
+    ],
+    "Intermediate": [
+      {
+        "time": "2026-10-29 11:00:00+00:00",
+        "price": 737.5,
+        "kind": "L"
+      },
+      {
+        "time": "2026-10-29 16:00:00+00:00",
+        "price": 753.5,
+        "kind": "H"
+      },
+      {
+        "time": "2026-10-29 20:00:00+00:00",
+        "price": 679.0,
+        "kind": "L"
+      },
+      {
+        "time": "2026-10-30 00:00:00+00:00",
+        "price": 680.72,
+        "kind": "L"
+      },
+      {
+        "time": "2026-10-30 05:00:00+00:00",
+        "price": 720.06,
+        "kind": "H"
+      },
+      {
+        "time": "2026-10-30 14:00:00+00:00",
+        "price": 688.37,
+        "kind": "L"
+      },
+      {
+        "time": "2026-10-30 15:00:00+00:00",
+        "price": 705.41,
+        "kind": "H"
+      },
+      {
+        "time": "2026-10-30 18:00:00+00:00",
+        "price": 694.35,
+        "kind": "L"
+      },
+      {
+        "time": "2026-10-31 00:00:00+00:00",
+        "price": 709.63,
+        "kind": "H"
+      },
+      {
+        "time": "2026-10-31 08:00:00+00:00",
+        "price": 697.85,
+        "kind": "L"
+      },
+      {
+        "time": "2026-10-31 14:00:00+00:00",
+        "price": 707.43,
+        "kind": "H"
+      },
+      {
+        "time": "2026-10-31 14:00:00+00:00",
+        "price": 701.81,
+        "kind": "L"
+      }
+    ],
+    "Minor": [
+      {
+        "time": "2026-10-30 18:45:00+00:00",
+        "price": 694.35,
+        "kind": "L"
+      },
+      {
+        "time": "2026-10-30 20:00:00+00:00",
+        "price": 702.74,
+        "kind": "H"
+      },
+      {
+        "time": "2026-10-30 21:45:00+00:00",
+        "price": 694.95,
+        "kind": "L"
+      },
+      {
+        "time": "2026-10-31 00:15:00+00:00",
+        "price": 709.63,
+        "kind": "H"
+      },
+      {
+        "time": "2026-10-31 02:30:00+00:00",
+        "price": 702.37,
+        "kind": "L"
+      },
+      {
+        "time": "2026-10-31 04:30:00+00:00",
+        "price": 699.85,
+        "kind": "L"
+      },
+      {
+        "time": "2026-10-31 06:00:00+00:00",
+        "price": 703.63,
+        "kind": "H"
+      },
+      {
+        "time": "2026-10-31 08:00:00+00:00",
+        "price": 697.85,
+        "kind": "L"
+      },
+      {
+        "time": "2026-10-31 12:30:00+00:00",
+        "price": 705.33,
+        "kind": "H"
+      },
+      {
+        "time": "2026-10-31 14:00:00+00:00",
+        "price": 701.81,
+        "kind": "L"
+      },
+      {
+        "time": "2026-10-31 14:45:00+00:00",
+        "price": 707.43,
+        "kind": "H"
+      },
+      {
+        "time": "2026-10-31 16:15:00+00:00",
+        "price": 703.43,
+        "kind": "L"
+      }
+    ],
+    "Micro": [
+      {
+        "time": "2026-10-31 14:05:00+00:00",
+        "price": 701.81,
+        "kind": "L"
+      },
+      {
+        "time": "2026-10-31 14:50:00+00:00",
+        "price": 707.43,
+        "kind": "H"
+      },
+      {
+        "time": "2026-10-31 15:20:00+00:00",
+        "price": 706.68,
+        "kind": "H"
+      },
+      {
+        "time": "2026-10-31 16:15:00+00:00",
+        "price": 703.43,
+        "kind": "L"
+      },
+      {
+        "time": "2026-10-31 16:25:00+00:00",
+        "price": 705.58,
+        "kind": "H"
+      },
+      {
+        "time": "2026-10-31 16:55:00+00:00",
+        "price": 703.95,
+        "kind": "L"
+      },
+      {
+        "time": "2026-10-31 17:15:00+00:00",
+        "price": 704.93,
+        "kind": "H"
+      },
+      {
+        "time": "2026-10-31 17:20:00+00:00",
+        "price": 703.87,
+        "kind": "L"
+      },
+      {
+        "time": "2026-10-31 18:15:00+00:00",
+        "price": 706.75,
+        "kind": "H"
+      },
+      {
+        "time": "2026-10-31 18:25:00+00:00",
+        "price": 704.83,
+        "kind": "L"
+      },
+      {
+        "time": "2026-10-31 19:05:00+00:00",
+        "price": 706.79,
+        "kind": "H"
+      },
+      {
+        "time": "2026-10-31 19:20:00+00:00",
+        "price": 705.01,
+        "kind": "L"
+      }
+    ]
+  },
+  "reading": [
+    "A bounce inside a larger DOWNTREND. Moves against the bigger trend are lower odds.",
+    "Price is sitting inside a strong zone (704.727 to 705.633); expect a reaction here (a bounce, or a break that then flips the zone).",
+    "Nearest support: 702.755 (strong, 9 touches, 0.66 ATR away).",
+    "Nearest resistance: 707.43 (weak, 2 touches, 0.6 ATR away).",
+    "The 1D chart is coiling (lower highs, higher lows); a break of either side usually starts a move.",
+    "The 1h chart is coiling (lower highs, higher lows); a break of either side usually starts a move.",
+    "Price has broken the 1D rising support line (it was touched 2 times).",
+    "Price has broken the 4h falling resistance line (it was touched 2 times)."
+  ],
+  "notes": [],
+  "atr_ref": 3.714591
+}
