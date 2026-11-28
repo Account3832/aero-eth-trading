@@ -1,0 +1,2 @@
+id,symbol,strategy,label,signal_time,entry_time,exit_time,entry,risk_per_unit,units,notional_usd,net_R,gross_R,pnl_usd,exit_reason,regime,evidence_status
+fa8a69dc53e4,ETH-USD,trend_pullback,trend_pullback@1.0#1458e1ec,2026-10-19 05:30:00+00:00,2026-10-19 05:45:00+00:00,2026-10-19 10:15:00+00:00,2426.24,10.738,3.9164,9502.12,0.264,0.818,11.11,T1|BE-stop,trend,NOT_PROVEN
